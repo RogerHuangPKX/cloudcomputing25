@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DimensionDomainIdFkAssoc"
+  Version="11.1.2.64.36">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="DomainIdDimensions"
+    Cardinality="1"
+    Source="true"
+    Owner="com.archemy.searchapp.model.entities.DimensionsEO">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="DomainIdDimensions"/>
+      <Attr Name="_foreignKey" Value="com.archemy.searchapp.model.entities.DimensionsEO.Primary1"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.archemy.searchapp.model.entities.DimensionsEO.DimensionId"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="Dimensions"
+    Cardinality="-1"
+    Owner="com.archemy.searchapp.model.entities.DimensionsEO">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="Dimensions"/>
+      <Attr Name="_foreignKey" Value="com.archemy.searchapp.model.entities.DimensionsEO.DimensionDomainIdFk"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.archemy.searchapp.model.entities.DimensionsEO.DomainId"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

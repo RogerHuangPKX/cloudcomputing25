@@ -1,0 +1,24 @@
+{% extends "archemywebapp/header.html" %}
+{% load staticfiles%}
+{% block content %}
+
+<div class="container-fluid wrapper">
+    <div class="col-sm-4">
+    </div>
+    <div class="col-sm-4">
+        <br><br>
+        <form class="form form-signin" method="post" action=".?next={{ redirect_to }}" >{% csrf_token %}
+            <h2 class="form-signin-heading">Please login</h2>
+            <br>
+            <input type="text" class="form-control" placeholder="Username" name="username">
+            <input type="password" class="form-control" placeholder="Password" name="password">
+            <br>
+            <button type="submit" class="btn btn-lg btn-primary btn-block" value="Login" id="login-button">Login</button>
+        </form>
+        <h4 class="form-signin-heading">New User? <a href="/register/">Click here</a></h4>
+    </div>
+    <div class="col-sm-4">
+    </div>
+</div>
+
+{% endblock %}

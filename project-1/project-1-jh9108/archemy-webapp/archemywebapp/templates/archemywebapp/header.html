@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Archemy</title>
+
+	{% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}" type="text/css" />
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Logo and responsive toggle -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/index/">
+                	<img src="{% static 'images/Archemy_TM.png' %}" width="90px" max-width="100%" height="auto">
+                </a>
+            </div>
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="menu">Philosophy &amp; Approach <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/ArchDev/">Architecture Development</a></li>
+							<li><a href="/AdaptiveReuse/">Adaptive Reuse</a></li>
+							<li class="dropdown-submenu">
+                                <a tabindex="-1" href="/AEL/">Architecture Evolution Lifecycle</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="/AEL/ideation/">Ideation</a></li>
+                                    <li><a href="/AEL/inception/">Inception</a></li>
+                                    <li><a href="/AEL/elaboration/">Elaboration</a></li>
+                                    <li><a href="/AEL/implementation/">Implementation</a></li>
+                                    <li><a href="/AEL/deployment/">Deployment</a></li>
+                                    <li><a href="#">Operation</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1" href="#">Our tooling</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="#">Ontology</a></li>
+                                    <li><a href="#">Ontology - Driven Search</a></li>
+                                    <li><a href="#">Process Capture</a></li>
+                                    <li><a href="#">Visual Navigation Tool</a></li>
+                                    <li><a href="#">Archifact Solution Catalogue</a></li>
+                                    <li><a href="#">Archifact Solution Repository</a></li>
+                                    <li><a href="#">Enterprise Reference Catalogue</a></li>
+                                </ul>
+                            </li>
+						</ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Partner With Us  <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+							<li class="dropdown-submenu">
+                                <a tabindex="-1" href="#">Post a Solution</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="#">Process</a></li>
+                                    <li><a href="#">Qualification</a></li>
+                                    <li><a href="#">Request a Review</a></li>
+                                </ul>
+                            </li>
+						</ul>
+                    </li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">What We Do  <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Managed Innovation, Design Thinking</a></li>
+							<li><a href="#">Strategy</a></li>
+							<li><a href="#">Delivery</a></li>
+                            <li><a href="#">Advisory Consulting</a></li>
+						</ul>
+					</li>
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Community  <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+							<li class="dropdown-submenu">
+                                <a tabindex="-1" href="#">Learn</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="#">White Papers</a></li>
+                                    <li><a href="#">Presentations</a></li>
+                                    <li><a href="#">Links</a></li>
+                                </ul>
+                            </li>
+							<li class="dropdown-submenu">
+                                <a tabindex="-1" href="#">Exchange Ideas</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="#">Blog</a></li>
+                                    <li><a href="#">Discussion Forum</a></li>
+                                </ul>
+                            </li>
+						</ul>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                    <li>
+                        {% if user.is_authenticated %}
+                            <a href="/logout/" class="dropdown-toggle" data-toggle="dropdown" role="button">Welcome, {{request.user.username}}  <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+							    <li><a tabindex="-1" href="/logout/">Logout</a></li>
+						    </ul>
+                        {% else %}
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><span class="glyphicon glyphicon-user"></span> User <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+							    <li><a href="/login/?next={{ request.path }}">Login</a></li>
+                                <li><a href="/register/">Register</a></li>
+						    </ul>
+                        {% endif %}    
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+    </nav>
+
+    {% load django_bootstrap_breadcrumbs %}
+
+    {% block breadcrumbs %}
+        {% clear_breadcrumbs %}
+        {% breadcrumb "Home" "/index/" %}
+    {% endblock %}
+
+    {% block content %}
+        {% render_breadcrumbs %}
+    {% endblock %}
+    
+
+    <!-- Footer -->
+	<footer>
+        <!-- Copyright etc -->
+        <div class="small-print">
+        	<div class="container">
+        		<p><a href="#">Terms &amp; Conditions</a> | <a href="#">Privacy Policy</a> | <a href="#">Contact</a></p>
+        		<p>Copyright &copy; Archemy 2016 </p>
+        	</div>
+        </div>
+        
+	</footer>
+
+	
+    <!-- jQuery -->
+    <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+	
+	<!-- IE10 viewport bug workaround -->
+	<script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+	
+</body>
+
+</html>

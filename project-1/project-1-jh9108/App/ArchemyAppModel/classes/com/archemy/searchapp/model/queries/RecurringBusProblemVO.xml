@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="RecurringBusProblemVO"
+  Version="11.1.2.64.36"
+  SelectList="RecurringBusProblemEO.BUSINESS_PROBLEM, 
+       RecurringBusProblemEO.ID, 
+       RecurringBusProblemEO.CONTEXT, 
+       RecurringBusProblemEO.DESCRIPTION, 
+       RecurringBusProblemEO.TYPE"
+  FromList="recurring_bus_problem RecurringBusProblemEO"
+  BindingStyle="JDBC"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FetchSize="50">
+  <ViewAccessor
+    Name="ProblemContextLookupVO1"
+    ViewObjectName="com.archemy.searchapp.model.lookups.ProblemContextLookupVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="BusinessProblemType1"
+    ViewObjectName="com.archemy.searchapp.model.lookups.BusinessProblemType"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_Context"
+    ListVOName="ProblemContextLookupVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Context"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ContextName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ContextName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Type"
+    ListVOName="BusinessProblemType1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Type"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Type"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Type"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="RecurringBusProblemEO"
+    Entity="com.archemy.searchapp.model.entities.RecurringBusProblemEO"/>
+  <ViewAttribute
+    Name="BusinessProblem"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="BusinessProblem"
+    EntityUsage="RecurringBusProblemEO"
+    AliasName="BUSINESS_PROBLEM">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="70"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Id"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="RecurringBusProblemEO"
+    Domain="com.archemy.searchapp.model.AutoIncrementPropertySet"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="Context"
+    PrecisionRule="true"
+    EntityAttrName="Context"
+    EntityUsage="RecurringBusProblemEO"
+    AliasName="CONTEXT"
+    LOVName="LOV_Context">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Description"
+    PrecisionRule="true"
+    EntityAttrName="Description"
+    EntityUsage="RecurringBusProblemEO"
+    AliasName="DESCRIPTION"/>
+  <ViewAttribute
+    Name="Type"
+    PrecisionRule="true"
+    EntityAttrName="Type"
+    EntityUsage="RecurringBusProblemEO"
+    AliasName="TYPE"
+    LOVName="LOV_Type">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="RecurringBusProblemVOCriteria"
+    ViewObjectName="com.archemy.searchapp.model.queries.RecurringBusProblemVO"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="RecurringBusProblemVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="RecurringBusProblemVOCriteria_RecurringBusProblemVOCriteria_row_0_BusinessProblem"
+        ViewAttribute="BusinessProblem"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="RecurringBusProblemVOCriteria_RecurringBusProblemVOCriteria_row_0_Id"
+        ViewAttribute="Id"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="RecurringBusProblemVOCriteria_RecurringBusProblemVOCriteria_row_0_Context"
+        ViewAttribute="Context"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="RecurringBusProblemVOCriteria_RecurringBusProblemVOCriteria_row_0_Description"
+        ViewAttribute="Description"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Type"
+        ViewAttribute="Type"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+</ViewObject>

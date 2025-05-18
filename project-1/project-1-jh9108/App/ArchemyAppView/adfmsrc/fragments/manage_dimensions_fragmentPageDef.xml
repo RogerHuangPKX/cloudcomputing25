@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="manage_dimensions_fragmentPageDef" Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DimensionsVO2" RangeSize="25" DataControl="ArchemySearchAMDataControl"
+              id="DimensionsVO2Iterator"/>
+    <searchRegion Criteria="__ImplicitViewCriteria__"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="DimensionsVO2Iterator" id="ImplicitViewCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="DimensionsVO2Iterator" id="DimensionsVO2">
+      <nodeDefinition DefName="com.archemy.searchapp.model.queries.DimensionsVO"
+                      Name="DimensionsVO20">
+        <AttrNames>
+          <Item Value="DimensionName"/>
+          <Item Value="DomainId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="DimensionsVO2Iterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action IterBinding="DimensionsVO2Iterator" id="Delete" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="ArchemySearchAMDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="ArchemySearchAMDataControl"/>
+  </bindings>
+</pageDefinition>

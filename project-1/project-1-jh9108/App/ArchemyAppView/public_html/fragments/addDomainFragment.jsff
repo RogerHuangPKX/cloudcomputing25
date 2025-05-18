@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="archemyappviewBundle"
+         value="#{adfBundle['com.archemy.searchapp.view.ArchemyAppViewBundle']}"/>
+  <af:panelGroupLayout id="pg1" layout="scroll">
+        <af:query id="qryId1" headerText="#{archemyappviewBundle.SEARCH_DOMAINS}" disclosed="true"
+                  value="#{bindings.ImplicitViewCriteriaQuery.queryDescriptor}"
+                  model="#{bindings.ImplicitViewCriteriaQuery.queryModel}"
+                  queryListener="#{bindings.ImplicitViewCriteriaQuery.processQuery}"
+                  queryOperationListener="#{bindings.ImplicitViewCriteriaQuery.processQueryOperation}"/>
+    <af:panelCollection id="pc2" styleClass="AFStrwtchWidth">
+   <f:facet name="toolbar" >
+   <af:toolbar id="tbl1">
+          <af:commandButton actionListener="#{bindings.CreateInsert.execute}"
+                            text="#{archemyappviewBundle.ADD_A_DOMAIN}"
+                           id="cb1"/>
+          <af:commandButton actionListener="#{bindings.Delete.execute}"
+                            text="#{archemyappviewBundle.DELETE_DOMAIN}"
+                           id="cb2"/>
+          <af:commandButton actionListener="#{bindings.Commit.execute}" text="Commit"
+                            id="cb3"/>
+          <af:commandButton actionListener="#{bindings.Rollback.execute}" text="Rollback"
+                            immediate="true" id="cb4">
+            <af:resetActionListener/>
+          </af:commandButton>
+        </af:toolbar>
+   </f:facet>
+    <af:table value="#{bindings.DomainsVO2.collectionModel}" var="row"
+              rows="#{bindings.DomainsVO2.rangeSize}"
+              emptyText="#{bindings.DomainsVO2.viewable ? 'No data to display.' : 'Access Denied.'}"
+              fetchSize="#{bindings.DomainsVO2.rangeSize}" rowBandingInterval="0"
+              selectedRowKeys="#{bindings.DomainsVO2.collectionModel.selectedRow}"
+              selectionListener="#{bindings.DomainsVO2.collectionModel.makeCurrent}"
+              rowSelection="single" id="t1" partialTriggers="::cb1 ::cb2">
+      <af:column sortProperty="#{bindings.DomainsVO2.hints.DomainName.name}" sortable="false"
+                 headerText="#{bindings.DomainsVO2.hints.DomainName.label}" id="c1">
+        <af:inputText value="#{row.bindings.DomainName.inputValue}"
+                      label="#{bindings.DomainsVO2.hints.DomainName.label}"
+                      required="#{bindings.DomainsVO2.hints.DomainName.mandatory}"
+                      columns="#{bindings.DomainsVO2.hints.DomainName.displayWidth}"
+                      maximumLength="#{bindings.DomainsVO2.hints.DomainName.precision}"
+                      shortDesc="#{bindings.DomainsVO2.hints.DomainName.tooltip}" id="it1">
+          <f:validator binding="#{row.bindings.DomainName.validator}"/>
+        </af:inputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.DomainsVO2.hints.DomainDescription.name}" sortable="false"
+                 headerText="#{bindings.DomainsVO2.hints.DomainDescription.label}" id="c2">
+        <af:inputText value="#{row.bindings.DomainDescription.inputValue}"
+                      label="#{bindings.DomainsVO2.hints.DomainDescription.label}"
+                      required="#{bindings.DomainsVO2.hints.DomainDescription.mandatory}"
+                      columns="#{bindings.DomainsVO2.hints.DomainDescription.displayWidth}"
+                      maximumLength="#{bindings.DomainsVO2.hints.DomainDescription.precision}"
+                      shortDesc="#{bindings.DomainsVO2.hints.DomainDescription.tooltip}" id="it2">
+          <f:validator binding="#{row.bindings.DomainDescription.validator}"/>
+        </af:inputText>
+      </af:column>
+    </af:table>
+    </af:panelCollection>
+  </af:panelGroupLayout>
+</jsp:root>

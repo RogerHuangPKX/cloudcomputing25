@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SummaryUsageStatisticsVO"
+  Version="11.1.2.64.36"
+  BindingStyle="JDBC"
+  CustomQuery="true"
+  RowClass="com.archemy.searchapp.model.queries.SummaryUsageStatisticsVORowImpl"
+  ComponentClass="com.archemy.searchapp.model.queries.SummaryUsageStatisticsVOImpl"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FetchSize="50">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Variable
+    Name="bkadId"
+    Kind="where"
+    Type="java.lang.Integer">
+    <AttrArray Name="ExtendedDataInts">
+      <Item Value="0"/>
+    </AttrArray>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT KadRegistrationEO.DEPLOYMENT_STATUS, 
+       KadRegistrationEO.APPLICABILITY_EXTENT, 
+       avg(KadRegistrationEO.BENEFIT_RATING) as AVG_BENEFIT_RATING, 
+       avg(KadRegistrationEO.MATURITY_RATING) as AVG_MATURITY_RATING, 
+       KadRegistrationEO.KAD_ID
+FROM kad_registration KadRegistrationEO
+where KAD_ID=?
+group by KadRegistrationEO.DEPLOYMENT_STATUS, 
+KadRegistrationEO.APPLICABILITY_EXTENT, KadRegistrationEO.KAD_ID]]></SQLQuery>
+  <ViewAttribute
+    Name="DeploymentStatus"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="DEPLOYMENT_STATUS"
+    Expression="DEPLOYMENT_STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ApplicabilityExtent"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR"
+    AliasName="APPLICABILITY_EXTENT"
+    Expression="APPLICABILITY_EXTENT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AvgBenefitRating"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="BIGINT"
+    AliasName="AVG_BENEFIT_RATING"
+    Expression="AVG_BENEFIT_RATING"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AvgMaturityRating"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="14"
+    Scale="4"
+    Type="java.math.BigDecimal"
+    ColumnType="DECIMAL"
+    AliasName="AVG_MATURITY_RATING"
+    Expression="AVG_MATURITY_RATING"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="KadId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Precision="11"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    AliasName="KAD_ID"
+    Expression="KAD_ID"
+    SQLType="INTEGER">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="11"/>
+    </DesignTime>
+  </ViewAttribute>
+</ViewObject>

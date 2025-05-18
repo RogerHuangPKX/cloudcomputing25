@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1">
+    <f:facet name="center">
+    <af:panelGroupLayout id="pg1" layout="scroll">
+      <af:panelCollection id="pc1" styleClass="AFStretchWidth" featuresOff="viewMenu detach">
+          <f:facet name="toolbar">
+            <af:toolbar id="tbl1">
+            <af:commandButton actionListener="#{bindings.CreateInsert.execute}" text="Add"
+                              id="cb1"/>
+            <af:commandButton actionListener="#{bindings.Commit.execute}" text="Save"
+                             id="cb2"/>
+            <af:commandButton actionListener="#{bindings.Rollback.execute}" text="Rollback"
+                              immediate="true" id="cb3">
+              <af:resetActionListener/>
+            </af:commandButton>
+          </af:toolbar>
+            </f:facet>
+      <af:table value="#{bindings.KadRegistrationVO1.collectionModel}" var="row"
+                rows="#{bindings.KadRegistrationVO1.rangeSize}"
+                emptyText="#{bindings.KadRegistrationVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                fetchSize="#{bindings.KadRegistrationVO1.rangeSize}" rowBandingInterval="0"
+                selectedRowKeys="#{bindings.KadRegistrationVO1.collectionModel.selectedRow}"
+                selectionListener="#{bindings.KadRegistrationVO1.collectionModel.makeCurrent}"
+                rowSelection="single" id="t1" partialTriggers="::cb1">
+        <af:column sortProperty="#{bindings.KadRegistrationVO1.hints.KadId.name}" sortable="true"
+                   headerText="#{bindings.KadRegistrationVO1.hints.KadId.label}" id="c1">
+          <af:inputComboboxListOfValues id="kadIdId"
+                                        popupTitle="Search and Select: #{bindings.KadRegistrationVO1.hints.KadId.label}"
+                                        value="#{row.bindings.KadId.inputValue}"
+                                        model="#{row.bindings.KadId.listOfValuesModel}"
+                                        required="#{bindings.KadRegistrationVO1.hints.KadId.mandatory}"
+                                        columns="#{bindings.KadRegistrationVO1.hints.KadId.displayWidth}"
+                                        shortDesc="#{bindings.KadRegistrationVO1.hints.KadId.tooltip}">
+            <f:validator binding="#{row.bindings.KadId.validator}"/>
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.KadRegistrationVO1.hints.KadId.format}"/>
+          </af:inputComboboxListOfValues>
+        </af:column>
+        <af:column sortProperty="#{bindings.KadRegistrationVO1.hints.MaturityRating.name}"
+                   sortable="true"
+                   headerText="#{bindings.KadRegistrationVO1.hints.MaturityRating.label}" id="c2">
+          <af:selectOneChoice value="#{row.bindings.MaturityRating.inputValue}"
+                              label="#{row.bindings.MaturityRating.label}"
+                              required="#{bindings.KadRegistrationVO1.hints.MaturityRating.mandatory}"
+                              shortDesc="#{bindings.KadRegistrationVO1.hints.MaturityRating.tooltip}"
+                              id="soc1">
+            <f:selectItems value="#{row.bindings.MaturityRating.items}" id="si1"/>
+          </af:selectOneChoice>
+        </af:column>
+        <af:column sortProperty="#{bindings.KadRegistrationVO1.hints.DeploymentStatus.name}"
+                   sortable="true"
+                   headerText="#{bindings.KadRegistrationVO1.hints.DeploymentStatus.label}" id="c3">
+          <af:selectOneChoice value="#{row.bindings.DeploymentStatus.inputValue}"
+                              label="#{row.bindings.DeploymentStatus.label}"
+                              required="#{bindings.KadRegistrationVO1.hints.DeploymentStatus.mandatory}"
+                              shortDesc="#{bindings.KadRegistrationVO1.hints.DeploymentStatus.tooltip}"
+                              id="soc2">
+            <f:selectItems value="#{row.bindings.DeploymentStatus.items}" id="si2"/>
+          </af:selectOneChoice>
+        </af:column>
+        <af:column sortProperty="#{bindings.KadRegistrationVO1.hints.ApplicabilityExtent.name}"
+                   sortable="true"
+                   headerText="#{bindings.KadRegistrationVO1.hints.ApplicabilityExtent.label}"
+                   id="c4">
+          <af:selectOneChoice value="#{row.bindings.ApplicabilityExtent.inputValue}"
+                              label="#{row.bindings.ApplicabilityExtent.label}"
+                              required="#{bindings.KadRegistrationVO1.hints.ApplicabilityExtent.mandatory}"
+                              shortDesc="#{bindings.KadRegistrationVO1.hints.ApplicabilityExtent.tooltip}"
+                              id="soc3">
+            <f:selectItems value="#{row.bindings.ApplicabilityExtent.items}" id="si3"/>
+          </af:selectOneChoice>
+        </af:column>
+        <af:column sortProperty="#{bindings.KadRegistrationVO1.hints.BenefitRating.name}"
+                   sortable="true"
+                   headerText="#{bindings.KadRegistrationVO1.hints.BenefitRating.label}" id="c5">
+          <af:selectOneChoice value="#{row.bindings.BenefitRating.inputValue}"
+                              label="#{row.bindings.BenefitRating.label}"
+                              required="#{bindings.KadRegistrationVO1.hints.BenefitRating.mandatory}"
+                              shortDesc="#{bindings.KadRegistrationVO1.hints.BenefitRating.tooltip}"
+                              id="soc4">
+            <f:selectItems value="#{row.bindings.BenefitRating.items}" id="si4"/>
+          </af:selectOneChoice>
+        </af:column>
+        <af:column sortProperty="#{bindings.KadRegistrationVO1.hints.Comments.name}" sortable="true"
+                   headerText="#{bindings.KadRegistrationVO1.hints.Comments.label}" id="c6">
+          <af:inputText value="#{row.bindings.Comments.inputValue}"
+                        label="#{bindings.KadRegistrationVO1.hints.Comments.label}"
+                      rows="3"   required="#{bindings.KadRegistrationVO1.hints.Comments.mandatory}"
+                        columns="#{bindings.KadRegistrationVO1.hints.Comments.displayWidth}"
+                        maximumLength="#{bindings.KadRegistrationVO1.hints.Comments.precision}"
+                        shortDesc="#{bindings.KadRegistrationVO1.hints.Comments.tooltip}" id="it1">
+            <f:validator binding="#{row.bindings.Comments.validator}"/>
+          </af:inputText>
+        </af:column>
+      </af:table>
+   </af:panelCollection>
+   </af:panelGroupLayout>
+    </f:facet>
+  </af:panelStretchLayout>
+</jsp:root>

@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1">
+    <f:facet name="center">
+      <af:panelGroupLayout layout="scroll" id="pgl1">
+        <af:panelHeader text="View Usage Statistics" id="ph1">
+              <af:query id="qryId1" headerText="Search" disclosed="true"
+                        value="#{bindings.ImplicitViewCriteriaQuery1.queryDescriptor}"
+                        model="#{bindings.ImplicitViewCriteriaQuery1.queryModel}"
+                        queryListener="#{bindings.ImplicitViewCriteriaQuery1.processQuery}"
+                        queryOperationListener="#{bindings.ImplicitViewCriteriaQuery1.processQueryOperation}"/>
+            </af:panelHeader>
+         <af:panelCollection id="pc1" styleClass="AFStretchWidth"  featuresOff="viewMenu detach">
+        <af:table value="#{bindings.UsageStatisticsVO1.collectionModel}" var="row"
+                  rows="#{bindings.UsageStatisticsVO1.rangeSize}"
+                  emptyText="#{bindings.UsageStatisticsVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  fetchSize="#{bindings.UsageStatisticsVO1.rangeSize}" rowBandingInterval="0"
+                  filterModel="#{bindings.ImplicitViewCriteriaQuery.queryDescriptor}"
+                  queryListener="#{bindings.ImplicitViewCriteriaQuery.processQuery}"
+                  filterVisible="true" varStatus="vs" partialTriggers=":::qryId1"
+                  selectedRowKeys="#{bindings.UsageStatisticsVO1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.UsageStatisticsVO1.collectionModel.makeCurrent}"
+                  rowSelection="single" id="resId1">
+          <af:column sortProperty="#{bindings.UsageStatisticsVO1.hints.KadId.name}"
+                     filterable="true" sortable="true"
+                     headerText="#{bindings.UsageStatisticsVO1.hints.KadId.label}" id="resId1c1">
+            <af:selectOneChoice value="#{row.bindings.KadId.inputValue}"
+                                label="#{row.bindings.KadId.label}"
+                                required="#{bindings.UsageStatisticsVO1.hints.KadId.mandatory}"
+                                shortDesc="#{bindings.UsageStatisticsVO1.hints.KadId.tooltip}"
+                                readOnly="true" id="soc1">
+              <f:selectItems value="#{row.bindings.KadId.items}" id="si1"/>
+            </af:selectOneChoice>
+          </af:column>
+          <af:column sortProperty="#{bindings.UsageStatisticsVO1.hints.CustomerName.name}"
+                  visible="#{FortressAllowed['view-customer-name:View:Admin']}"   filterable="true" sortable="true"
+                     headerText="#{bindings.UsageStatisticsVO1.hints.CustomerName.label}"
+                     id="resId1c2">
+            <af:outputText value="#{row.CustomerName}"
+                           shortDesc="#{bindings.UsageStatisticsVO1.hints.CustomerName.tooltip}"
+                           id="ot1"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.UsageStatisticsVO1.hints.Industry.name}"
+                     filterable="true" sortable="true"
+                     headerText="#{bindings.UsageStatisticsVO1.hints.Industry.label}" id="resId1c3">
+            <af:outputText value="#{row.Industry}"
+                           shortDesc="#{bindings.UsageStatisticsVO1.hints.Industry.tooltip}"
+                           id="ot2"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.UsageStatisticsVO1.hints.ApplicabilityExtent.name}"
+                     filterable="true" sortable="true"
+                     headerText="#{bindings.UsageStatisticsVO1.hints.ApplicabilityExtent.label}"
+                     id="resId1c4">
+            <af:outputText value="#{row.ApplicabilityExtent}"
+                           shortDesc="#{bindings.UsageStatisticsVO1.hints.ApplicabilityExtent.tooltip}"
+                           id="ot3"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.UsageStatisticsVO1.hints.BenefitRating.name}"
+                     filterable="true" sortable="true"
+                     headerText="#{bindings.UsageStatisticsVO1.hints.BenefitRating.label}"
+                     id="resId1c5">
+            <af:outputText value="#{row.BenefitRating}"
+                           shortDesc="#{bindings.UsageStatisticsVO1.hints.BenefitRating.tooltip}"
+                           id="ot4">
+              <af:convertNumber groupingUsed="false"
+                                pattern="#{bindings.UsageStatisticsVO1.hints.BenefitRating.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column sortProperty="#{bindings.UsageStatisticsVO1.hints.DeploymentStatus.name}"
+                     filterable="true" sortable="true"
+                     headerText="#{bindings.UsageStatisticsVO1.hints.DeploymentStatus.label}"
+                     id="resId1c6">
+            <af:outputText value="#{row.DeploymentStatus}"
+                           shortDesc="#{bindings.UsageStatisticsVO1.hints.DeploymentStatus.tooltip}"
+                           id="ot5"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.UsageStatisticsVO1.hints.MaturityRating.name}"
+                     filterable="true" sortable="true"
+                     headerText="#{bindings.UsageStatisticsVO1.hints.MaturityRating.label}"
+                     id="resId1c7">
+            <af:outputText value="#{row.MaturityRating}"
+                           shortDesc="#{bindings.UsageStatisticsVO1.hints.MaturityRating.tooltip}"
+                           id="ot6">
+              <af:convertNumber groupingUsed="false"
+                                pattern="#{bindings.UsageStatisticsVO1.hints.MaturityRating.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column sortProperty="#{bindings.UsageStatisticsVO1.hints.Comments.name}"
+                     filterable="true" sortable="true"
+                     headerText="#{bindings.UsageStatisticsVO1.hints.Comments.label}" id="resId1c8">
+            <af:inputText value="#{row.Comments}"
+                        rows="5" readOnly="true"   shortDesc="#{bindings.UsageStatisticsVO1.hints.Comments.tooltip}"
+                           id="ot7"/>
+          </af:column>
+        </af:table>
+        </af:panelCollection>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:panelStretchLayout>
+</jsp:root>

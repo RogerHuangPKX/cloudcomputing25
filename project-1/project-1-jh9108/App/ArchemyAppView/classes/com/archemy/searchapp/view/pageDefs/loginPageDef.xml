@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="loginPageDef" Package="com.archemy.searchapp.view.pageDefs">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="addCustomerRowIfNotExists"
+                  InstanceName="data.ArchemySearchAMDataControl.dataProvider"
+                  DataControl="ArchemySearchAMDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="addCustomerRowIfNotExists"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="custId" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

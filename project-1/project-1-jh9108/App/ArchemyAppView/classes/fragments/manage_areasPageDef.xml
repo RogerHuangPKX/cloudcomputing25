@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="manage_areasPageDef" Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="AreasVO2" RangeSize="25" DataControl="ArchemySearchAMDataControl"
+              id="AreasVO2Iterator"/>
+    <searchRegion Criteria="__ImplicitViewCriteria__"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="AreasVO2Iterator" id="ImplicitViewCriteriaQuery"/>
+<searchRegion id="AreasVOCriteria1" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+    Binds="AreasVO2Iterator" Criteria="AreasVOCriteria1" />
+  </executables>
+  <bindings>
+    <tree IterBinding="AreasVO2Iterator" id="AreasVO2">
+      <nodeDefinition DefName="com.archemy.searchapp.model.queries.AreasVO" Name="AreasVO2">
+        <AttrNames>
+          <Item Value="AreaParentId"/>
+          <Item Value="AreaOrderNo"/>
+          <Item Value="AreaDepthLevel"/>
+          <Item Value="DimensionId"/>
+          <Item Value="AreaName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="AreasVO2Iterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action IterBinding="AreasVO2Iterator" id="Delete" RequiresUpdateModel="true"
+            Action="removeCurrentRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="ArchemySearchAMDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="true" Action="rollbackTransaction"
+            DataControl="ArchemySearchAMDataControl"/>
+  </bindings>
+</pageDefinition>

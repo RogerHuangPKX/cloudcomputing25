@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="viewcustomerinfoPageDef" Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="CustomerInfoAllVO1" RangeSize="25" DataControl="ArchemySearchAMDataControl"
+              id="CustomerInfoAllVO1Iterator"/>
+    <searchRegion Criteria="__ImplicitViewCriteria__"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="CustomerInfoAllVO1Iterator" id="ImplicitViewCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="CustomerInfoAllVO1Iterator" id="CustomerInfoAllVO1">
+      <nodeDefinition DefName="com.archemy.searchapp.model.queries.CustomerInfoAllVO"
+                      Name="CustomerInfoAllVO10">
+        <AttrNames>
+          <Item Value="CustomerName"/>
+          <Item Value="Industry"/>
+          <Item Value="UserId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

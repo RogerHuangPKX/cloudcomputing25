@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="archemyappviewBundle"
+         value="#{adfBundle['com.archemy.searchapp.view.ArchemyAppViewBundle']}"/>
+  <af:panelStretchLayout id="psl1">
+    <f:facet name="center">
+     <af:panelGroupLayout id="pg1" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="pgl1">
+            <af:query id="qryId1" headerText="#{archemyappviewBundle.SEARCH_KADS}" disclosed="true"
+                      value="#{bindings.ImplicitViewCriteriaQuery.queryDescriptor}"
+                      model="#{bindings.ImplicitViewCriteriaQuery.queryModel}"
+                      queryListener="#{bindings.ImplicitViewCriteriaQuery.processQuery}"
+                      queryOperationListener="#{bindings.ImplicitViewCriteriaQuery.processQueryOperation}"
+                      resultComponentId="::pc1:resId1"/>
+          <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+          <af:table value="#{bindings.KadsVO3.collectionModel}" var="row"
+                    rows="#{bindings.KadsVO3.rangeSize}"
+                    emptyText="#{bindings.KadsVO3.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    fetchSize="#{bindings.KadsVO3.rangeSize}" rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.KadsVO3.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.KadsVO3.collectionModel.makeCurrent}"
+                    rowSelection="single" id="resId1">
+            <af:column sortProperty="#{bindings.KadsVO3.hints.KadId.name}" sortable="false"
+                       headerText="#{archemyappviewBundle.KAD_ID}" id="resId1c1">
+              <af:outputText value="#{row.KadId}"
+                             shortDesc="#{bindings.KadsVO3.hints.KadId.tooltip}" id="ot1">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.KadsVO3.hints.KadId.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.KadsVO3.hints.KadName.name}" sortable="false"
+                       headerText="#{archemyappviewBundle.KAD_NAME}" id="resId1c2">
+              <af:outputText value="#{row.KadName}"
+                             shortDesc="#{bindings.KadsVO3.hints.KadName.tooltip}" id="ot2"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.KadsVO3.hints.DomainId.name}" sortable="false"
+                       headerText="#{archemyappviewBundle.DOMAIN_NAME}" id="resId1c3">
+              <af:selectOneChoice value="#{row.bindings.DomainId.inputValue}"
+                                  label="#{row.bindings.DomainId.label}"
+                                  required="#{bindings.KadsVO3.hints.DomainId.mandatory}"
+                                  shortDesc="#{bindings.KadsVO3.hints.DomainId.tooltip}"
+                                  readOnly="true" id="soc1">
+                <f:selectItems value="#{row.bindings.DomainId.items}" id="si1"/>
+              </af:selectOneChoice>
+            </af:column>
+          </af:table>
+          </af:panelCollection>
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+     
+    </f:facet>
+  </af:panelStretchLayout>
+</jsp:root>

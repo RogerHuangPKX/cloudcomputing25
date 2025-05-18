@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="viewusagestatisticsfragPageDef" Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="UsageStatisticsVO1" RangeSize="25" DataControl="ArchemySearchAMDataControl"
+              id="UsageStatisticsVO1Iterator"/>
+    <searchRegion Criteria="__ImplicitViewCriteria__"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="UsageStatisticsVO1Iterator" id="ImplicitViewCriteriaQuery"/>
+    <searchRegion Criteria="__ImplicitViewCriteria__"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="UsageStatisticsVO1Iterator" id="ImplicitViewCriteriaQuery1"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="UsageStatisticsVO1Iterator" id="UsageStatisticsVO1">
+      <nodeDefinition DefName="com.archemy.searchapp.model.queries.UsageStatisticsVO"
+                      Name="UsageStatisticsVO10">
+        <AttrNames>
+          <Item Value="KadId"/>
+          <Item Value="CustomerName"/>
+          <Item Value="Industry"/>
+          <Item Value="ApplicabilityExtent"/>
+          <Item Value="BenefitRating"/>
+          <Item Value="DeploymentStatus"/>
+          <Item Value="MaturityRating"/>
+          <Item Value="Comments"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

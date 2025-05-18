@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<skins xmlns="http://myfaces.apache.org/trinidad/skin">
+  <skin>
+    <id>customskin.desktop</id>
+    <family>customskin</family>
+    <extends>fusionFx-simple-v2.1.desktop</extends>
+    <render-kit-id>org.apache.myfaces.trinidad.desktop</render-kit-id>
+    <style-sheet-name>skins/customskin/customskin.css</style-sheet-name>
+    <bundle-name>com/archemy/searchapp/view.skinBundle</bundle-name>
+  </skin>
+</skins>

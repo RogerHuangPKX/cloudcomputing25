@@ -1,0 +1,15 @@
+{% extends "archemywebapp/header.html" %}
+
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Adaptive Reuse" "/AdaptiveReuse/" %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Adaptive Reuse Page</h1>
+    <p>This is the content for the Adaptive Reuse page. It will be filled in later.</p>
+</div>
+{% endblock %}

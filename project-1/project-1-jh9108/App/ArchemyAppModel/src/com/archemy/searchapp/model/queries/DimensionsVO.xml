@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DimensionsVO"
+  Version="11.1.2.64.36"
+  SelectList="DimensionsEO.DIMENSION_ID, 
+       DimensionsEO.DIMENSION_NAME, 
+       DimensionsEO.DOMAIN_ID"
+  FromList="dimensions DimensionsEO"
+  BindingStyle="JDBC"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FetchSize="50">
+  <Variable
+    Name="bDimensionId"
+    Kind="viewcriteria"
+    Type="java.lang.Integer">
+    <AttrArray Name="ExtendedDataInts">
+      <Item Value="0"/>
+    </AttrArray>
+  </Variable>
+  <ViewAccessor
+    Name="DomainsVO1"
+    ViewObjectName="com.archemy.searchapp.model.queries.DomainsVO"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_DomainId"
+    ListVOName="DomainsVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DomainId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DomainId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DomainName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="DimensionsEO"
+    Entity="com.archemy.searchapp.model.entities.DimensionsEO"/>
+  <ViewAttribute
+    Name="DimensionId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="DimensionId"
+    EntityUsage="DimensionsEO"
+    AliasName="DIMENSION_ID"
+    IsUpdateable="while_insert"/>
+  <ViewAttribute
+    Name="DimensionName"
+    PrecisionRule="true"
+    EntityAttrName="DimensionName"
+    EntityUsage="DimensionsEO"
+    AliasName="DIMENSION_NAME"/>
+  <ViewAttribute
+    Name="DomainId"
+    PrecisionRule="true"
+    EntityAttrName="DomainId"
+    EntityUsage="DimensionsEO"
+    AliasName="DOMAIN_ID"
+    LOVName="LOV_DomainId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="DimensionsVOCriteria"
+    ViewObjectName="com.archemy.searchapp.model.queries.DimensionsVO"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="DimensionsVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="DimensionId"
+        ViewAttribute="DimensionId"
+        Operator="="
+        Conjunction="AND"
+        Value=":bDimensionId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewLinkAccessor
+    Name="Dimensions"
+    ViewLink="com.archemy.searchapp.model.viewlink.DimensionDomainIdFkVL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+</ViewObject>

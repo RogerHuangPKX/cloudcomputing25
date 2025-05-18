@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="11.1.2.64.36" id="DataBindings"
+              SeparateXMLFiles="false" Package="com.archemy.searchapp.view" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/fragments/searchAndAddKAD.jsff" usageId="com_archemy_searchapp_view_searchAndAddKADPageDef"/>
+    <page path="/fragments/addDomainFragment.jsff"
+          usageId="com_archemy_searchapp_view_addDomainFragmentPageDef"/>
+    <page path="/WEB-INF/taskflow/manage-domains-task-flow-definition.xml#add-domains-task-flow-definition@executeEmptyRowSet"
+          usageId="com_archemy_searchapp_view_add_domains_task_flow_definition_add_domains_task_flow_definition_executeEmptyRowSetPageDef"/>
+    <page path="/WEB-INF/taskflow/search-kad-task-flow-definition.xml#search-kad-task-flow-definition@executeEmptyRowSet"
+          usageId="com_archemy_searchapp_view_search_kad_task_flow_definition_search_kad_task_flow_definition_executeEmptyRowSetPageDef"/>
+    <page path="/fragments/search-kad.jsff" usageId="com_archemy_searchapp_view_search_kadPageDef"/>
+    <page path="/WEB-INF/taskflow/manage-dimensions-task-flow-definition.xml#manage-dimensions-task-flow-definition@executeEmptyRowSet"
+          usageId="com_archemy_searchapp_view_manage_dimensions_task_flow_definition_manage_dimensions_task_flow_definition_executeEmptyRowSetPageDef"/>
+    <page path="/fragments/manage-dimensions-fragment.jsff"
+          usageId="com_archemy_searchapp_view_manage_dimensions_fragmentPageDef"/>
+    <page path="/WEB-INF/taskflow/manage-areas-task-flow-definition.xml#manage-areas-task-flow-definition@executeEmptyRowSet"
+          usageId="com_archemy_searchapp_view_manage_areas_task_flow_definition_manage_areas_task_flow_definition_executeEmptyRowSetPageDef"/>
+    <page path="/fragments/manage-areas.jsff"
+          usageId="com_archemy_searchapp_view_manage_areasPageDef"/>
+    <page path="/secured/Home.jspx" usageId="com_archemy_searchapp_view_HomePageDef"/>
+    <page path="/WEB-INF/taskflow/register-kad-usage-task-flow-definition.xml#register-kad-usage-task-flow-definition@executeEmptyRowSet"
+          usageId="com_archemy_searchapp_view_register_kad_usage_task_flow_definition_register_kad_usage_task_flow_definition_executeEmptyRowSetPageDef"/>
+    <page path="/fragments/registerkad.jsff"
+          usageId="com_archemy_searchapp_view_registerorsearchkadPageDef"/>
+    <page path="/WEB-INF/taskflow/view-usage-statistics-tf.xml#view-usage-statistics-tf@executeEmptyRowSet"
+          usageId="com_archemy_searchapp_view_view_usage_statistics_tf_view_usage_statistics_tf_executeEmptyRowSetPageDef"/>
+    <page path="/fragments/viewusagestatisticsfrag.jsff"
+          usageId="com_archemy_searchapp_view_viewusagestatisticsfragPageDef"/>
+    <page path="/WEB-INF/taskflow/edit-customer-info-tf.xml#edit-customer-info-tf@ExecuteWithParams"
+          usageId="com_archemy_searchapp_view_edit_customer_info_tf_edit_customer_info_tf_ExecuteWithParamsPageDef"/>
+    <page path="/fragments/editcustomerinfo.jsff"
+          usageId="com_archemy_searchapp_view_editcustomerinfoPageDef"/>
+    <page path="/fragments/changepassword.jsff"
+          usageId="com_archemy_searchapp_view_changepasswordPageDef"/>
+    <page path="/WEB-INF/taskflow/change-password-task-flow-definition.xml#change-password-task-flow-definition@ExecuteWithParams"
+          usageId="com_archemy_searchapp_view_change_password_task_flow_definition_change_password_task_flow_definition_ExecuteWithParamsPageDef"/>
+    <page path="/WEB-INF/taskflow/forced-password-change-task-flow-definition.xml#forced-password-change-task-flow-definition@ExecuteWithParams"
+          usageId="com_archemy_searchapp_view_forced_password_change_task_flow_definition_forced_password_change_task_flow_definition_ExecuteWithParamsPageDef"/>
+    <page path="/fragments/forcedpasswdchange.jsff"
+          usageId="com_archemy_searchapp_view_forcedpasswdchangePageDef"/>
+    <page path="/changePassword.jspx" usageId="com_archemy_searchapp_view_changePasswordPageDef"/>
+    <page path="/login.jspx" usageId="com_archemy_searchapp_view_loginPageDef"/>
+    <page path="/WEB-INF/taskflow/recurring-business-problem-tf.xml#recurring-business-problem-tf@executeEmptyRowSet"
+          usageId="com_archemy_searchapp_view_recurring_business_problem_tf_recurring_business_problem_tf_executeEmptyRowSetPageDef"/>
+    <page path="/fragments/recurringbusproblems.jsff"
+          usageId="com_archemy_searchapp_view_recurringbusproblemsPageDef"/>
+    <page path="/WEB-INF/taskflow/view-customer-info-task-flow-definition.xml#view-customer-info-task-flow-definition@executeEmptyRowSet"
+          usageId="com_archemy_searchapp_view_view_customer_info_task_flow_definition_view_customer_info_task_flow_definition_executeEmptyRowSetPageDef"/>
+    <page path="/fragments/viewcustomerinfo.jsff"
+          usageId="com_archemy_searchapp_view_viewcustomerinfoPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="com_archemy_searchapp_view_searchAndAddKADPageDef" path="fragments.searchAndAddKADPageDef"/>
+    
+    <page id="com_archemy_searchapp_view_addDomainFragmentPageDef"
+          path="fragments.addDomainFragmentPageDef"/>
+    <page id="com_archemy_searchapp_view_add_domains_task_flow_definition_add_domains_task_flow_definition_executeEmptyRowSetPageDef"
+          path="taskflow.add_domains_task_flow_definition_add_domains_task_flow_definition_executeEmptyRowSetPageDef"/>
+    <page id="com_archemy_searchapp_view_search_kad_task_flow_definition_search_kad_task_flow_definition_executeEmptyRowSetPageDef"
+          path="taskflow.search_kad_task_flow_definition_search_kad_task_flow_definition_executeEmptyRowSetPageDef"/>
+    <page id="com_archemy_searchapp_view_search_kadPageDef"
+          path="com.archemy.searchapp.view.pageDefs.search_kadPageDef"/>
+    <page id="com_archemy_searchapp_view_manage_dimensions_task_flow_definition_manage_dimensions_task_flow_definition_executeEmptyRowSetPageDef"
+          path="taskflow.manage_dimensions_task_flow_definition_manage_dimensions_task_flow_definition_executeEmptyRowSetPageDef"/>
+    <page id="com_archemy_searchapp_view_manage_dimensions_fragmentPageDef"
+          path="fragments.manage_dimensions_fragmentPageDef"/>
+    <page id="com_archemy_searchapp_view_manage_areas_task_flow_definition_manage_areas_task_flow_definition_executeEmptyRowSetPageDef"
+          path="taskflow.manage_areas_task_flow_definition_manage_areas_task_flow_definition_executeEmptyRowSetPageDef"/>
+    <page id="com_archemy_searchapp_view_manage_areasPageDef" path="fragments.manage_areasPageDef"/>
+    <page id="com_archemy_searchapp_view_HomePageDef"
+          path="com.archemy.searchapp.view.pageDefs.HomePageDef"/>
+    <page id="com_archemy_searchapp_view_register_kad_usage_task_flow_definition_register_kad_usage_task_flow_definition_executeEmptyRowSetPageDef"
+          path="taskflow.register_kad_usage_task_flow_definition_register_kad_usage_task_flow_definition_executeEmptyRowSetPageDef"/>
+    <page id="com_archemy_searchapp_view_registerorsearchkadPageDef"
+          path="fragments.registerorsearchkadPageDef"/>
+    <page id="com_archemy_searchapp_view_view_usage_statistics_tf_view_usage_statistics_tf_executeEmptyRowSetPageDef"
+          path="taskflow.view_usage_statistics_tf_view_usage_statistics_tf_executeEmptyRowSetPageDef"/>
+    <page id="com_archemy_searchapp_view_viewusagestatisticsfragPageDef"
+          path="fragments.viewusagestatisticsfragPageDef"/>
+    <page id="com_archemy_searchapp_view_edit_customer_info_tf_edit_customer_info_tf_ExecuteWithParamsPageDef"
+          path="taskflow.edit_customer_info_tf_edit_customer_info_tf_ExecuteWithParamsPageDef"/>
+    <page id="com_archemy_searchapp_view_editcustomerinfoPageDef"
+          path="com.archemy.searchapp.view.pageDefs.editcustomerinfoPageDef"/>
+    <page id="com_archemy_searchapp_view_changepasswordPageDef"
+          path="fragments.changepasswordPageDef"/>
+    <page id="com_archemy_searchapp_view_change_password_task_flow_definition_change_password_task_flow_definition_ExecuteWithParamsPageDef"
+          path="taskflow.change_password_task_flow_definition_change_password_task_flow_definition_ExecuteWithParamsPageDef"/>
+    <page id="com_archemy_searchapp_view_forced_password_change_task_flow_definition_forced_password_change_task_flow_definition_ExecuteWithParamsPageDef"
+          path="taskflow.forced_password_change_task_flow_definition_forced_password_change_task_flow_definition_ExecuteWithParamsPageDef"/>
+    <page id="com_archemy_searchapp_view_forcedpasswdchangePageDef"
+          path="fragments.forcedpasswdchangePageDef"/>
+    <page id="com_archemy_searchapp_view_changePasswordPageDef"
+          path="com.archemy.searchapp.view.pageDefs.changePasswordPageDef"/>
+    <page id="com_archemy_searchapp_view_loginPageDef"
+          path="com.archemy.searchapp.view.pageDefs.loginPageDef"/>
+    <page id="com_archemy_searchapp_view_recurring_business_problem_tf_recurring_business_problem_tf_executeEmptyRowSetPageDef"
+          path="taskflow.recurring_business_problem_tf_recurring_business_problem_tf_executeEmptyRowSetPageDef"/>
+    <page id="com_archemy_searchapp_view_recurringbusproblemsPageDef"
+          path="fragments.recurringbusproblemsPageDef"/>
+    <page id="com_archemy_searchapp_view_view_customer_info_task_flow_definition_view_customer_info_task_flow_definition_executeEmptyRowSetPageDef"
+          path="taskflow.view_customer_info_task_flow_definition_view_customer_info_task_flow_definition_executeEmptyRowSetPageDef"/>
+    <page id="com_archemy_searchapp_view_viewcustomerinfoPageDef"
+          path="fragments.viewcustomerinfoPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="ArchemySearchAMDataControl" Package="com.archemy.searchapp.model.am"
+                  ExceptionMode="Immediate"    FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="ArchemySearchAMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

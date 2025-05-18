@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="HomePageDef" Package="com.archemy.searchapp.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="dynamicRegion1" taskFlowId="${viewScope.NavBacking.dynamicTaskFlowId}"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="editcustomerinfotf1"
+              taskFlowId="/WEB-INF/taskflow/edit-customer-info-tf.xml#edit-customer-info-tf"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <iterator Binds="UsageStatisticsVO1" RangeSize="10" DataControl="ArchemySearchAMDataControl"
+              id="UsageStatisticsVO1Iterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="addCustomerRowIfNotExists"
+                  InstanceName="data.ArchemySearchAMDataControl.dataProvider"
+                  DataControl="ArchemySearchAMDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="addCustomerRowIfNotExists"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.ArchemySearchAMDataControl.methodResults.addCustomerRowIfNotExists_ArchemySearchAMDataControl_dataProvider_addCustomerRowIfNotExists_result">
+      <NamedData NDName="custId" NDType="java.lang.String"/>
+    </methodAction>
+    <list ListOperMode="navigation" IterBinding="UsageStatisticsVO1Iterator"
+          ListIter="UsageStatisticsVO1Iterator" id="CustomerName">
+      <AttrNames>
+        <Item Value="CustomerName"/>
+      </AttrNames>
+    </list>
+  </bindings>
+</pageDefinition>

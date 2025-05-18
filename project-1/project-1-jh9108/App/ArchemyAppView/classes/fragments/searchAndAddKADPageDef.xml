@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+               id="searchAndAddKADPageDef" Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables">
+      <variable Name="BusinessProblem_id" Type="java.lang.Integer"></variable>
+    </variableIterator>
+    <iterator Binds="DomainLookupVO1" RangeSize="25" DataControl="ArchemySearchAMDataControl"
+              id="DomainLookupVO1Iterator"/>
+    <iterator Binds="KADDimensionsAreaTempVO1" RangeSize="25"
+              DataControl="ArchemySearchAMDataControl" id="KADDimensionsAreaTempVO1Iterator"/>
+    <iterator id="DimensionsFilteredByDomainVO1Iterator" Binds="DimensionsFilteredByDomainVO1"
+              DataControl="ArchemySearchAMDataControl" RangeSize="-1"/>
+    <iterator Binds="KadSearchTransVO1" RangeSize="25" DataControl="ArchemySearchAMDataControl"
+              id="KadSearchTransVO1Iterator"/>
+    <iterator Binds="KadTempVO1" RangeSize="25" DataControl="ArchemySearchAMDataControl"
+              id="KadTempVO1Iterator"/>
+    <iterator Binds="SummaryUsageStatisticsVO1" RangeSize="25"
+              DataControl="ArchemySearchAMDataControl" id="SummaryUsageStatisticsVO1Iterator"/>
+    <iterator Binds="BusinessProblemLookupVO1" RangeSize="-1"
+              DataControl="ArchemySearchAMDataControl" id="BusinessProblemLookupVO1Iterator"/>
+  </executables>
+  <bindings>
+    <list IterBinding="DomainLookupVO1Iterator" ListOperMode="navigation"
+          ListIter="DomainLookupVO1Iterator" id="DomainLookupVO1" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="DomainName"/>
+      </AttrNames>
+    </list>
+    <tree IterBinding="KADDimensionsAreaTempVO1Iterator"  ChangeEventPolicy="ppr" id="KADDimensionsAreaTempVO1">
+      <nodeDefinition DefName="com.archemy.searchapp.model.queries.KADDimensionsAreaTempVO"
+                      Name="KADDimensionsAreaTempVO10">
+        <AttrNames>
+          <Item Value="DimensionId" Binds="DimensionId"/>
+          <Item Value="AreaChildId"/>
+          <Item Value="AreaId"/>
+          <Item Value="Weight"/>
+          <Item Value="Closeness"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="KADDimensionsAreaTempVO1Iterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="KADDimensionsAreaTempVO1Iterator" id="Delete" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="ArchemySearchAMDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="ArchemySearchAMDataControl"/>
+    <tree IterBinding="KadSearchTransVO1Iterator" id="KadSearchTransVO1">
+      <nodeDefinition DefName="com.archemy.searchapp.model.queries.KadSearchTransVO"
+                      Name="KadSearchTransVO10">
+        <AttrNames>
+          <Item Value="KadID"/>
+          <Item Value="KadLink"/>
+          <Item Value="KadName"/>
+          <Item Value="KadLinkPublic"/>
+          <Item Value="DomainName"/>
+          <Item Value="Score"/>
+          <Item Value="HitCounter"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="KadTempVO1Iterator" id="CreateInsert1" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <attributeValues IterBinding="KadTempVO1Iterator" id="KadName">
+      <AttrNames>
+        <Item Value="KadName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="KadTempVO1Iterator" id="KadLink">
+      <AttrNames>
+        <Item Value="KadLink"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="KadTempVO1Iterator" id="Delete1"
+            InstanceName="ArchemySearchAMDataControl.KadTempVO1"
+            DataControl="ArchemySearchAMDataControl" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <methodAction id="removeKAD" InstanceName="data.ArchemySearchAMDataControl.dataProvider"
+                  DataControl="ArchemySearchAMDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="removeKAD" IsViewObjectMethod="false">
+      <NamedData NDName="kadId" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="searchAndRankKad" InstanceName="data.ArchemySearchAMDataControl.dataProvider"
+                  DataControl="ArchemySearchAMDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="searchAndRankKad" IsViewObjectMethod="false">
+      <NamedData NDName="businessProblem" NDValue="" NDType="java.lang.Integer"/>
+    </methodAction>
+    <list StaticList="false" IterBinding="KADDimensionsAreaTempVO1Iterator"
+           ListIter="DimensionsFilteredByDomainVO1Iterator" id="DimensionId" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="DimensionId"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="DimensionId"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="DimensionName"/>
+      </ListDisplayAttrNames>
+    </list>
+    <attributeValues IterBinding="KadTempVO1Iterator" id="KadPublicLink">
+      <AttrNames>
+        <Item Value="KadPublicLink"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="KadTempVO1Iterator" Uses="LOV_Business_problem"
+                  id="Business_problem"/>
+    <tree IterBinding="SummaryUsageStatisticsVO1Iterator" id="SummaryUsageStatisticsVO1">
+      <nodeDefinition DefName="com.archemy.searchapp.model.queries.SummaryUsageStatisticsVO"
+                      Name="SummaryUsageStatisticsVO10">
+        <AttrNames>
+          <Item Value="KadId"/>
+          <Item Value="DeploymentStatus"/>
+          <Item Value="ApplicabilityExtent"/>
+          <Item Value="AvgBenefitRating"/>
+          <Item Value="AvgMaturityRating"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="incrementHitCount" InstanceName="data.ArchemySearchAMDataControl.dataProvider"
+                  DataControl="ArchemySearchAMDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="incrementHitCount" IsViewObjectMethod="false"
+                  ReturnName="data.ArchemySearchAMDataControl.methodResults.incrementHitCount_ArchemySearchAMDataControl_dataProvider_incrementHitCount_result">
+      <NamedData NDName="kadId" NDType="int"/>
+    </methodAction>
+    <methodAction id="addKAD" InstanceName="data.ArchemySearchAMDataControl.dataProvider"
+                  DataControl="ArchemySearchAMDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="addKAD" IsViewObjectMethod="false">
+      <NamedData NDName="domainId" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="insertKADTempRow" InstanceName="data.ArchemySearchAMDataControl.dataProvider"
+                  DataControl="ArchemySearchAMDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="insertKADTempRow" IsViewObjectMethod="false"/>
+    <list IterBinding="DimensionsFilteredByDomainVO1Iterator" ListOperMode="navigation"
+          ListIter="DimensionsFilteredByDomainVO1Iterator" id="DimensionsFilteredByDomainVO1"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="DimensionId"/>
+      </AttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="DimensionName"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list StaticList="false" IterBinding="variables" ListIter="BusinessProblemLookupVO1Iterator" NullValueFlag="start" id="BusinessProblem_id1"
+          NullValueId="BusinessProblem_id1_null">
+      <AttrNames>
+        <Item Value="BusinessProblem_id"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="Id"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="BusinessProblem"/>
+      </ListDisplayAttrNames>
+    </list>
+  </bindings>
+  <ResourceBundle>
+    <PropertiesBundle xmlns="http://xmlns.oracle.com/adfm/resourcebundle"
+                      PropertiesFile="fragments.common.searchAndAddKADPageDefMsgBundle"/>
+  </ResourceBundle>
+</pageDefinition>

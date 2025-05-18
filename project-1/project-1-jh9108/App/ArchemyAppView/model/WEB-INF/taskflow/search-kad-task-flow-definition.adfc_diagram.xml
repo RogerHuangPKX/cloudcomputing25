@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <MethodCall
+      id="MethodCall2">
+      <property
+         name="activityId">executeEmptyRowSet</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>executeEmptyRowSet&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">145.14941</property>
+      <property
+         name="x">209.02734</property>
+   </MethodCall>
+   <View
+      id="View3">
+      <property
+         name="activityId">search-kad</property>
+      <property
+         name="page">/fragments/search-kad.jsff</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>search-kad&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">151.29883</property>
+      <property
+         name="x">371.0</property>
+      <property
+         name="pageFragment">true</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="MethodCall2"
+      to="View3">
+      <property
+         name="fromOutcome">executeEmptyRowSet</property>
+      <property
+         name="sdm:polyPoints">R50,250.02734,144.79883,330.0,150.94824,L50</property>
+   </ControlFlowCase>
+</SDM>

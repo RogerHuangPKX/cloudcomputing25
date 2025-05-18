@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="KADLookupVO"
+  Version="11.1.2.64.36"
+  SelectList="KadsEO.KAD_NAME, 
+       KadsEO.KAD_ID"
+  FromList="kads KadsEO"
+  BindingStyle="JDBC"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FetchSize="50">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.archemy.searchapp.model.lookups.KADLookupVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <EntityUsage
+    Name="KadsEO"
+    Entity="com.archemy.searchapp.model.entities.KadsEO"/>
+  <ViewAttribute
+    Name="KadName"
+    PrecisionRule="true"
+    EntityAttrName="KadName"
+    EntityUsage="KadsEO"
+    AliasName="KAD_NAME"/>
+  <ViewAttribute
+    Name="KadId"
+    IsUpdateable="while_insert"
+    PrecisionRule="true"
+    EntityAttrName="KadId"
+    EntityUsage="KadsEO"
+    Domain="com.archemy.searchapp.model.AutoIncrementPropertySet"
+    AliasName="KAD_ID"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.archemy.searchapp.model.ArchemyAppModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

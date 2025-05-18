@@ -1,0 +1,321 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core">
+  <c:set var="archemyappviewBundle"
+         value="#{adfBundle['com.archemy.searchapp.view.ArchemyAppViewBundle']}"/>
+  <af:panelGroupLayout id="pg1" layout="scroll">
+    <af:selectOneChoice value="#{bindings.DomainLookupVO1.inputValue}"
+                        label="#{archemyappviewBundle.SELECT_DOMAIN}"
+                        required="#{bindings.DomainLookupVO1.hints.mandatory}"
+                        valueChangeListener="#{pageFlowScope.searchAndAddKad.onDomainSelected}"
+                        shortDesc="#{bindings.DomainLookupVO1.hints.tooltip}" id="soc1"
+                        autoSubmit="true">
+      <f:selectItems value="#{bindings.DomainLookupVO1.items}" id="si1"/>
+    </af:selectOneChoice>
+    <af:selectOneChoice value="#{bindings.BusinessProblem_id1.inputValue}" autoSubmit="true"
+                        label="Business Problem" required="false"
+                        valueChangeListener="#{pageFlowScope.searchAndAddKad.onBusinessProblemSelected}"
+                        shortDesc="#{bindings.BusinessProblem_id1.hints.tooltip}" id="soc5">
+      <f:selectItems value="#{bindings.BusinessProblem_id1.items}" id="si2"/>
+    </af:selectOneChoice>
+    <af:spacer id="sp1" height="10"/>
+    <af:outputText id="opt232" value="#{pageFlowScope.searchAndAddKad.domainID}" visible="false"/>
+    <af:outputText id="opt233" value="#{pageFlowScope.searchAndAddKad.businessProblem}"
+                   visible="false"/>
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+      <f:facet name="toolbar">
+        <af:toolbar id="tb1">
+          <af:commandButton actionListener="#{pageFlowScope.searchAndAddKad.addCriteriaRow}"
+                            immediate="true" text="#{archemyappviewBundle.ADD_A_CRITERIA}"
+                            id="cb1"/>
+          <af:commandButton actionListener="#{pageFlowScope.searchAndAddKad.removeCriteriaRow}"
+                            immediate="true" text="#{archemyappviewBundle.REMOVE_CRITERIA}"
+                            disabled="#{!bindings.Delete.enabled}" id="cb2"/>
+        </af:toolbar>
+      </f:facet>
+      <af:table value="#{bindings.KADDimensionsAreaTempVO1.collectionModel}" var="row"
+                immediate="true" rows="#{bindings.KADDimensionsAreaTempVO1.rangeSize}"
+                styleClass="AFStretchWidth"
+                emptyText="#{bindings.KADDimensionsAreaTempVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                fetchSize="#{bindings.KADDimensionsAreaTempVO1.rangeSize}" rowBandingInterval="0"
+                binding="#{pageFlowScope.searchAndAddKad.table1}"
+                selectedRowKeys="#{bindings.KADDimensionsAreaTempVO1.collectionModel.selectedRow}"
+                selectionListener="#{bindings.KADDimensionsAreaTempVO1.collectionModel.makeCurrent}"
+                rowSelection="single" id="t1" partialTriggers="::cb1 ::cb2 :::soc1">
+        <af:column sortProperty="#{bindings.KADDimensionsAreaTempVO1.hints.DimensionId.name}"
+                   sortable="false"
+                   headerText="#{bindings.KADDimensionsAreaTempVO1.hints.DimensionId.label}"
+                   id="c1">
+          <af:selectOneChoice value="#{row.bindings.DimensionId.inputValue}" autoSubmit="true"
+                              required="#{bindings.KADDimensionsAreaTempVO1.hints.DimensionId.mandatory}"
+                         shortDesc="#{bindings.KADDimensionsAreaTempVO1.hints.DimensionId.tooltip}"
+                              id="soc2"
+                              valueChangeListener="#{pageFlowScope.searchAndAddKad.onDimensionSelected}"
+                              showRequired="true">
+            <f:selectItems value="#{row.bindings.DimensionId.items}" id="si5"/>
+          </af:selectOneChoice>
+        </af:column>
+        <af:column headerText="#{bindings.KADDimensionsAreaTempVO1.hints.AreaId.label}" id="c17">
+          <af:selectOneChoice value="#{row.bindings.AreaId.inputValue}"   
+                        label="#{row.bindings.AreaId.label}"
+                              required="#{bindings.KADDimensionsAreaTempVO1.hints.AreaId.mandatory}"
+                              shortDesc="#{bindings.KADDimensionsAreaTempVO1.hints.AreaId.tooltip}"
+                              id="soc6" autoSubmit="true" partialTriggers="soc2"
+                              requiredMessageDetail="Please select value for {0}">
+            <f:selectItems value="#{row.bindings.AreaId.items}" id="si6"/>
+          </af:selectOneChoice>
+        </af:column>
+        <af:column sortProperty="#{bindings.KADDimensionsAreaTempVO1.hints.AreaChildId.name}"
+                   sortable="false"
+                   headerText="#{bindings.KADDimensionsAreaTempVO1.hints.AreaChildId.label}"
+                   id="c2">
+          <af:selectOneChoice value="#{row.bindings.AreaChildId.inputValue}"
+                              label="#{row.bindings.AreaChildId.label}" autoSubmit="true"
+                              required="#{bindings.KADDimensionsAreaTempVO1.hints.AreaChildId.mandatory}"
+                              shortDesc="#{bindings.KADDimensionsAreaTempVO1.hints.AreaChildId.tooltip}"
+                              id="soc3">
+            <f:selectItems value="#{row.bindings.AreaChildId.items}" id="si3"/>
+          </af:selectOneChoice>
+        </af:column>
+        <af:column sortProperty="#{bindings.KADDimensionsAreaTempVO1.hints.Weight.name}"
+                   sortable="false"
+                   headerText="#{bindings.KADDimensionsAreaTempVO1.hints.Weight.label}" id="c4">
+          <af:inputText value="#{row.bindings.Weight.inputValue}" autoSubmit="true"
+                        valueChangeListener="#{pageFlowScope.searchAndAddKad.weightChanged}"
+                        label="#{bindings.KADDimensionsAreaTempVO1.hints.Weight.label}"
+                        required="#{bindings.KADDimensionsAreaTempVO1.hints.Weight.mandatory}"
+                        columns="#{bindings.KADDimensionsAreaTempVO1.hints.Weight.displayWidth}"
+                        maximumLength="#{bindings.KADDimensionsAreaTempVO1.hints.Weight.precision}"
+                        shortDesc="#{bindings.KADDimensionsAreaTempVO1.hints.Weight.tooltip}"
+                        id="it1" immediate="true">
+            <f:validator binding="#{row.bindings.Weight.validator}"/>
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.KADDimensionsAreaTempVO1.hints.Weight.format}"/>
+          </af:inputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.KADDimensionsAreaTempVO1.hints.Closeness.name}"
+                   sortable="false"
+                   headerText="#{bindings.KADDimensionsAreaTempVO1.hints.Closeness.label}" id="c5">
+          <af:inputText value="#{row.bindings.Closeness.inputValue}" autoSubmit="true"
+                        immediate="true"
+                        label="#{bindings.KADDimensionsAreaTempVO1.hints.Closeness.label}"
+                        required="#{bindings.KADDimensionsAreaTempVO1.hints.Closeness.mandatory}"
+                        columns="#{bindings.KADDimensionsAreaTempVO1.hints.Closeness.displayWidth}"
+                        maximumLength="#{bindings.KADDimensionsAreaTempVO1.hints.Closeness.precision}"
+                        shortDesc="#{bindings.KADDimensionsAreaTempVO1.hints.Closeness.tooltip}"
+                        id="it2">
+            <f:validator binding="#{row.bindings.Closeness.validator}"/>
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.KADDimensionsAreaTempVO1.hints.Closeness.format}"/>
+          </af:inputText>
+        </af:column>
+      </af:table>
+      <f:facet name="statusbar">
+        <af:toolbar id="stab1" partialTriggers="t1:it1 cb2">
+          <af:outputText id="opt3433"
+                         value="Remaining Weight #{pageFlowScope.searchAndAddKad.remainingWeight}"/>
+        </af:toolbar>
+      </f:facet>
+    </af:panelCollection>
+    <af:spacer id="sp2" height="10"/>
+    <af:panelGroupLayout id="pg2" layout="horizontal">
+      <af:commandButton id="cb5" text="#{archemyappviewBundle.SEARCH_KAD}" action=" "
+                        actionListener="#{pageFlowScope.searchAndAddKad.searchKAD}"/>
+      <af:commandButton text="#{archemyappviewBundle.ADD_KAD}"
+                        visible="#{FortressAllowed['searchoraddcatalog:add-catalog:Admin']}"
+                        actionListener="#{pageFlowScope.searchAndAddKad.addKADRowAndShowPopup}"
+                        id="cb3"/>
+      <af:commandButton id="cb23" text="#{archemyappviewBundle.DELETE_KAD}"
+                        visible="#{FortressAllowed['searchoraddcatalog:add-catalog:Admin']}"
+                        action="#{pageFlowScope.searchAndAddKad.deleteKAD}"/>
+    </af:panelGroupLayout>
+    <af:panelCollection id="pst2" styleClass="AFStretchWidth" featuresOff="detach viewMenu">
+      <af:table value="#{bindings.KadSearchTransVO1.collectionModel}" var="row"
+                rows="#{bindings.KadSearchTransVO1.rangeSize}"
+                partialTriggers=":::cb5 :::cb3 :::cb23"
+                emptyText="#{bindings.KadSearchTransVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                fetchSize="#{bindings.KadSearchTransVO1.rangeSize}" rowBandingInterval="0"
+                selectedRowKeys="#{bindings.KadSearchTransVO1.collectionModel.selectedRow}"
+                selectionListener="#{bindings.KadSearchTransVO1.collectionModel.makeCurrent}"
+                rowSelection="single" id="t2">
+        <af:column sortProperty="#{bindings.KadSearchTransVO1.hints.KadID.name}" sortable="false"
+                   headerText="#{bindings.KadSearchTransVO1.hints.KadID.label}" id="c6">
+          <af:outputText value="#{row.KadID}"
+                         shortDesc="#{bindings.KadSearchTransVO1.hints.KadID.tooltip}" id="ot1">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.KadSearchTransVO1.hints.KadID.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.KadSearchTransVO1.hints.KadLink.name}" sortable="false"
+                   headerText="#{bindings.KadSearchTransVO1.hints.KadLink.label}" id="c7">
+          <af:commandLink text="#{row.KadLink}"
+                          actionListener="#{pageFlowScope.searchAndAddKad.linkClicked}"
+                          shortDesc="#{bindings.KadSearchTransVO1.hints.KadLink.tooltip}" id="ot2">
+            <af:setPropertyListener from="#{row.KadLinkPublic}" to="#{pageFlowScope.link}"
+                                    type="action"/>
+            <af:setPropertyListener from="#{row.KadID}" to="#{pageFlowScope.kadId}" type="action"/>
+          </af:commandLink>
+        </af:column>
+        <af:column sortProperty="#{bindings.KadSearchTransVO1.hints.KadLinkPublic.name}"
+                   sortable="false"
+                   headerText="#{bindings.KadSearchTransVO1.hints.KadLinkPublic.label}" id="c71">
+          <af:commandLink text="#{row.KadLinkPublic}"
+                          actionListener="#{pageFlowScope.searchAndAddKad.linkClicked}"
+                          shortDesc="#{bindings.KadSearchTransVO1.hints.KadLinkPublic.tooltip}"
+                          id="ot21">
+            <af:setPropertyListener from="#{row.KadLinkPublic}" to="#{pageFlowScope.link}"
+                                    type="action"/>
+            <af:setPropertyListener from="#{row.KadID}" to="#{pageFlowScope.kadId}" type="action"/>
+          </af:commandLink>
+        </af:column>
+        <af:column sortProperty="#{bindings.KadSearchTransVO1.hints.KadName.name}" sortable="false"
+                   headerText="#{bindings.KadSearchTransVO1.hints.KadName.label}" id="c8">
+          <af:outputText value="#{row.KadName}"
+                         shortDesc="#{bindings.KadSearchTransVO1.hints.KadName.tooltip}" id="ot3"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.KadSearchTransVO1.hints.DomainName.name}"
+                   sortable="false"
+                   headerText="#{bindings.KadSearchTransVO1.hints.DomainName.label}" id="c9">
+          <af:outputText value="#{row.DomainName}"
+                         shortDesc="#{bindings.KadSearchTransVO1.hints.DomainName.tooltip}"
+                         id="ot4"/>
+        </af:column>
+        <af:column headerText="#{bindings.KadSearchTransVO1.hints.HitCounter.label}" id="c11">
+          <af:outputText value="#{row.bindings.HitCounter.inputValue}" partialTriggers="ot2 ot21"
+                         shortDesc="#{bindings.KadSearchTransVO1.hints.HitCounter.tooltip}"
+                         id="it6">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.KadSearchTransVO1.hints.HitCounter.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="Usage Statistics" id="c232">
+          <af:commandLink id="cl2323" text="View Usage Statistics"
+                          actionListener="#{pageFlowScope.searchAndAddKad.viewUsageStatistics}">
+            <af:setPropertyListener from="#{row.KadID}" to="#{pageFlowScope.kadId}" type="action"/>
+          </af:commandLink>
+        </af:column>
+        <af:column sortProperty="#{bindings.KadSearchTransVO1.hints.Score.name}" sortable="false"
+                   headerText="Score" id="c10">
+          <af:outputText value="#{row.Score/bindings.KadSearchTransVO1Iterator.viewObject.max['Score']*100}"
+                         shortDesc="#{bindings.KadSearchTransVO1.hints.Score.tooltip}" id="ot5">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.KadSearchTransVO1.hints.Score.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.KadSearchTransVO1.hints.Score.name}" sortable="false"
+                   headerText="Absolute Score" id="c111">
+          <af:outputText value="#{row.Score}"
+                         shortDesc="#{bindings.KadSearchTransVO1.hints.Score.tooltip}" id="ot66">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.KadSearchTransVO1.hints.Score.format}"/>
+          </af:outputText>
+        </af:column>
+      </af:table>
+    </af:panelCollection>
+    <af:popup id="pu1" binding="#{pageFlowScope.searchAndAddKad.addPopup}" animate="default"
+              childCreation="deferred" clientComponent="true">
+      <af:dialog id="dg1" closeIconVisible="false" type="none" title="Add KAD">
+        <af:panelGroupLayout id="pg54" layout="vertical">
+          <af:inputText value="#{bindings.KadName.inputValue}"
+                        label="#{archemyappviewBundle.KAD_NAME}"
+                        required="#{bindings.KadName.hints.mandatory}"
+                        columns="#{bindings.KadName.hints.displayWidth}"
+                        maximumLength="#{bindings.KadName.hints.precision}"
+                        shortDesc="#{bindings.KadName.hints.tooltip}" id="it3">
+            <f:validator binding="#{bindings.KadName.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{sessionScope.licenseValid ? bindings.KadLink.inputValue: 'Not allowed'}"
+                        rows="3" label="#{archemyappviewBundle.KAD_LINK}"
+                        required="#{bindings.KadLink.hints.mandatory}"
+                        columns="#{bindings.KadLink.hints.displayWidth}"
+                        maximumLength="#{bindings.KadLink.hints.precision}"
+                        shortDesc="#{bindings.KadLink.hints.tooltip}" id="it4">
+            <f:validator binding="#{bindings.KadLink.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.KadPublicLink.inputValue}" rows="3"
+                        label="#{bindings.KadPublicLink.hints.label}"
+                        required="#{bindings.KadPublicLink.hints.mandatory}"
+                        columns="#{bindings.KadPublicLink.hints.displayWidth}"
+                        maximumLength="#{bindings.KadPublicLink.hints.precision}"
+                        shortDesc="#{bindings.KadPublicLink.hints.tooltip}" id="it5">
+            <f:validator binding="#{bindings.KadPublicLink.validator}"/>
+          </af:inputText>
+          <af:inputListOfValues id="business_problemId"
+                                popupTitle="Search and Select: #{bindings.Business_problem.hints.label}"
+                                value="#{bindings.Business_problem.inputValue}"
+                                label="#{bindings.Business_problem.hints.label}"
+                                model="#{bindings.Business_problem.listOfValuesModel}"
+                                required="#{bindings.Business_problem.hints.mandatory}"
+                                columns="#{bindings.Business_problem.hints.displayWidth}"
+                                shortDesc="#{bindings.Business_problem.hints.tooltip}">
+            <f:validator binding="#{bindings.Business_problem.validator}"/>
+          </af:inputListOfValues>
+        </af:panelGroupLayout>
+        <f:facet name="buttonBar">
+          <af:toolbar id="tbl1">
+            <af:commandButton id="cb10" text="Save"
+                              action="#{pageFlowScope.searchAndAddKad.addKad}"/>
+            <af:commandButton id="cb11" text="CANCEL" immediate="true"
+                              actionListener="#{pageFlowScope.searchAndAddKad.removeKADRow}"/>
+          </af:toolbar>
+        </f:facet>
+      </af:dialog>
+    </af:popup>
+    <af:popup id="pu2" binding="#{pageFlowScope.searchAndAddKad.summaryPopup}"
+              childCreation="deferred" clientComponent="true">
+      <af:dialog id="dg2" closeIconVisible="true" type="none" title="Summary Usage Statistics">
+        <af:table value="#{bindings.SummaryUsageStatisticsVO1.collectionModel}" var="row"
+                  rows="#{bindings.SummaryUsageStatisticsVO1.rangeSize}"
+                  emptyText="#{bindings.SummaryUsageStatisticsVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  fetchSize="#{bindings.SummaryUsageStatisticsVO1.rangeSize}" rowBandingInterval="0"
+                  selectedRowKeys="#{bindings.SummaryUsageStatisticsVO1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.SummaryUsageStatisticsVO1.collectionModel.makeCurrent}"
+                  rowSelection="single" id="t3">
+          <af:column sortProperty="#{bindings.SummaryUsageStatisticsVO1.hints.KadId.name}"
+                     sortable="false"
+                     headerText="#{bindings.SummaryUsageStatisticsVO1.hints.KadId.label}" id="c12">
+            <af:outputText value="#{row.KadId}"
+                           shortDesc="#{bindings.SummaryUsageStatisticsVO1.hints.KadId.tooltip}"
+                           id="ot6">
+              <af:convertNumber groupingUsed="false"
+                                pattern="#{bindings.SummaryUsageStatisticsVO1.hints.KadId.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column sortProperty="#{bindings.SummaryUsageStatisticsVO1.hints.DeploymentStatus.name}"
+                     sortable="false"
+                     headerText="#{bindings.SummaryUsageStatisticsVO1.hints.DeploymentStatus.label}"
+                     id="c13">
+            <af:outputText value="#{row.DeploymentStatus}"
+                           shortDesc="#{bindings.SummaryUsageStatisticsVO1.hints.DeploymentStatus.tooltip}"
+                           id="ot7"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.SummaryUsageStatisticsVO1.hints.ApplicabilityExtent.name}"
+                     sortable="false"
+                     headerText="#{bindings.SummaryUsageStatisticsVO1.hints.ApplicabilityExtent.label}"
+                     id="c14">
+            <af:outputText value="#{row.ApplicabilityExtent}"
+                           shortDesc="#{bindings.SummaryUsageStatisticsVO1.hints.ApplicabilityExtent.tooltip}"
+                           id="ot8"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.SummaryUsageStatisticsVO1.hints.AvgBenefitRating.name}"
+                     sortable="false"
+                     headerText="#{bindings.SummaryUsageStatisticsVO1.hints.AvgBenefitRating.label}"
+                     id="c15">
+            <af:outputText value="#{row.AvgBenefitRating}"
+                           shortDesc="#{bindings.SummaryUsageStatisticsVO1.hints.AvgBenefitRating.tooltip}"
+                           id="ot9"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.SummaryUsageStatisticsVO1.hints.AvgMaturityRating.name}"
+                     sortable="false"
+                     headerText="#{bindings.SummaryUsageStatisticsVO1.hints.AvgMaturityRating.label}"
+                     id="c16">
+            <af:outputText value="#{row.AvgMaturityRating}"
+                           shortDesc="#{bindings.SummaryUsageStatisticsVO1.hints.AvgMaturityRating.tooltip}"
+                           id="ot10"/>
+          </af:column>
+        </af:table>
+      </af:dialog>
+    </af:popup>
+  </af:panelGroupLayout>
+</jsp:root>

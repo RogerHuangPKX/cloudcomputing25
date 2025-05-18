@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="registerorsearchkadPageDef" Package="fragments">
+  <parameters/>
+  <executables>
+    <iterator Binds="KadRegistrationVO1" RangeSize="25" DataControl="ArchemySearchAMDataControl"
+              id="KadRegistrationVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="KadRegistrationVO1Iterator" id="KadRegistrationVO1">
+      <nodeDefinition DefName="com.archemy.searchapp.model.queries.KadRegistrationVO"
+                      Name="KadRegistrationVO10">
+        <AttrNames>
+          <Item Value="KadId"/>
+          <Item Value="MaturityRating"/>
+          <Item Value="DeploymentStatus"/>
+          <Item Value="ApplicabilityExtent"/>
+          <Item Value="BenefitRating"/>
+          <Item Value="Comments"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="KadRegistrationVO1Iterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="ArchemySearchAMDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="ArchemySearchAMDataControl"/>
+  </bindings>
+</pageDefinition>

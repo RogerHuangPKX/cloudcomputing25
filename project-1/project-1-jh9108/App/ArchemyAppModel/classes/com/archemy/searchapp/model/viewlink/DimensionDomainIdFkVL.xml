@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DimensionDomainIdFkVL"
+  Version="11.1.2.64.36"
+  EntityAssociation="com.archemy.searchapp.model.assoc.DimensionDomainIdFkAssoc">
+  <ViewLinkDefEnd
+    Name="DomainIdDimensions"
+    Cardinality="1"
+    Source="true"
+    Owner="com.archemy.searchapp.model.queries.DimensionsVO">
+    <DesignTime>
+      <Attr Name="_finderName" Value="DomainIdDimensions"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.archemy.searchapp.model.queries.DimensionsVO.DimensionId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="Dimensions"
+    Cardinality="-1"
+    Owner="com.archemy.searchapp.model.queries.DimensionsVO">
+    <DesignTime>
+      <Attr Name="_finderName" Value="Dimensions"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.archemy.searchapp.model.queries.DimensionsVO.DomainId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+</ViewLink>

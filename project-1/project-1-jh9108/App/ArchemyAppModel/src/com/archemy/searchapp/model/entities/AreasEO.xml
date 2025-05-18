@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AreasEO"
+  Version="11.1.2.64.36"
+  DBObjectType="table"
+  DBObjectName="areas"
+  AliasName="AreasEO"
+  BindingStyle="JDBC"
+  UseGlueCode="false"
+  RowClass="com.archemy.searchapp.model.entities.AreasEOImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_superClass" Value="com.archemy.searchapp.model.entities.AutoIncrementEntityImpl"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="AreaId"
+    ColumnName="AREA_ID"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="areas"
+    PrimaryKey="true"
+    IsUpdateable="while_insert"
+    Domain="com.archemy.searchapp.model.AutoIncrementPropertySet">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="AreaParentId"
+    ColumnName="AREA_PARENT_ID"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="areas">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AreaOrderNo"
+    Precision="45"
+    ColumnName="AREA_ORDER_NO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR"
+    TableName="areas">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AreaDepthLevel"
+    ColumnName="AREA_DEPTH_LEVEL"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="areas">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="DimensionId"
+    ColumnName="DIMENSION_ID"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="areas">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AreaName"
+    Precision="100"
+    ColumnName="AREA_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR"
+    TableName="areas">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <AccessorAttribute
+    Name="Areas"
+    Association="com.archemy.searchapp.model.assoc.AreaDimensionIdFkAssoc"
+    AssociationEnd="com.archemy.searchapp.model.assoc.AreaDimensionIdFkAssoc.Areas"
+    AssociationOtherEnd="com.archemy.searchapp.model.assoc.AreaDimensionIdFkAssoc.DimensionIdAreas"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="DimensionIdAreas"
+    Association="com.archemy.searchapp.model.assoc.AreaDimensionIdFkAssoc"
+    AssociationEnd="com.archemy.searchapp.model.assoc.AreaDimensionIdFkAssoc.DimensionIdAreas"
+    AssociationOtherEnd="com.archemy.searchapp.model.assoc.AreaDimensionIdFkAssoc.Areas"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="AreaParentIdAreas"
+    Association="com.archemy.searchapp.model.assoc.SelfAssocAreasEO"
+    AssociationEnd="com.archemy.searchapp.model.assoc.SelfAssocAreasEO.AreaParentIdAreas"
+    AssociationOtherEnd="com.archemy.searchapp.model.assoc.SelfAssocAreasEO.Areas1"
+    Type="com.archemy.searchapp.model.entities.AreasEOImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="Areas1"
+    Association="com.archemy.searchapp.model.assoc.SelfAssocAreasEO"
+    AssociationEnd="com.archemy.searchapp.model.assoc.SelfAssocAreasEO.Areas1"
+    AssociationOtherEnd="com.archemy.searchapp.model.assoc.SelfAssocAreasEO.AreaParentIdAreas"
+    Type="com.archemy.searchapp.model.entities.AreasEOImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="Primary1"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="PRIMARY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.archemy.searchapp.model.entities.AreasEO.AreaId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="AreaDimensionIdFk">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PRIMARY"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="AREA_DIMENSION_ID_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.archemy.searchapp.model.entities.AreasEO.DimensionId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_AreasEO">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PRIMARY"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_AREAS_EO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.archemy.searchapp.model.entities.AreasEO.AreaParentId"/>
+    </AttrArray>
+  </Key>
+</Entity>

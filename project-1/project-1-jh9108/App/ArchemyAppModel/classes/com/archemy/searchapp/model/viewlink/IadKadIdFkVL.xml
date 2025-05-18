@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="IadKadIdFkVL"
+  Version="11.1.2.64.36"
+  EntityAssociation="com.archemy.searchapp.model.assoc.IadKadIdFkAssoc">
+  <ViewLinkDefEnd
+    Name="KadIdIads"
+    Cardinality="1"
+    Source="true"
+    Owner="com.archemy.searchapp.model.queries.IadsVO">
+    <DesignTime>
+      <Attr Name="_finderName" Value="KadIdIads"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.archemy.searchapp.model.queries.IadsVO.IadId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="Iads"
+    Cardinality="-1"
+    Owner="com.archemy.searchapp.model.queries.IadsVO">
+    <DesignTime>
+      <Attr Name="_finderName" Value="Iads"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.archemy.searchapp.model.queries.IadsVO.KadId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+</ViewLink>

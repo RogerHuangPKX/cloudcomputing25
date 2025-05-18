@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="add_domains_task_flow_definition_add_domains_task_flow_definition_executeEmptyRowSetPageDef"
+                Package="taskflow" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="executeEmptyRowSet" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="executeEmptyRowSet" IsViewObjectMethod="false"
+                  DataControl="ArchemySearchAMDataControl"
+                  InstanceName="data.ArchemySearchAMDataControl.dataProvider">
+      <NamedData NDName="voName" NDValue="DomainsVO2" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

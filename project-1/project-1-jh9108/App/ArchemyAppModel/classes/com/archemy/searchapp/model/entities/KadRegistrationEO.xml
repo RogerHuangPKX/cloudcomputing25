@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="KadRegistrationEO"
+  Version="11.1.2.64.36"
+  DBObjectType="table"
+  DBObjectName="kad_registration"
+  AliasName="KadRegistrationEO"
+  BindingStyle="JDBC"
+  UseGlueCode="false"
+  RowClass="com.archemy.searchapp.model.entities.KadRegistrationEOImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_superClass" Value="com.archemy.searchapp.model.entities.AutoIncrementEntityImpl"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="UserId"
+    IsNotNull="true"
+    Precision="150"
+    ColumnName="USER_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR"
+    TableName="kad_registration">
+    <TransientExpression><![CDATA[adf.context.sessionScope.userId]]></TransientExpression>
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="150"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Id"
+    ColumnName="ID"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="kad_registration"
+    PrimaryKey="true"
+    Domain="com.archemy.searchapp.model.AutoIncrementPropertySet">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="KadId"
+    IsNotNull="true"
+    ColumnName="KAD_ID"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="kad_registration">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="MaturityRating"
+    IsNotNull="true"
+    ColumnName="MATURITY_RATING"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="kad_registration">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="DeploymentStatus"
+    IsNotNull="true"
+    Precision="100"
+    ColumnName="DEPLOYMENT_STATUS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR"
+    TableName="kad_registration">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="ApplicabilityExtent"
+    IsNotNull="true"
+    Precision="100"
+    ColumnName="APPLICABILITY_EXTENT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR"
+    TableName="kad_registration">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="BenefitRating"
+    IsNotNull="true"
+    ColumnName="BENEFIT_RATING"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="kad_registration">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Comments"
+    Precision="500"
+    ColumnName="COMMENTS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR"
+    TableName="kad_registration">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <AccessorAttribute
+    Name="KadRegistration"
+    Association="com.archemy.searchapp.model.assoc.KadRegisterToKadFkAssoc"
+    AssociationEnd="com.archemy.searchapp.model.assoc.KadRegisterToKadFkAssoc.KadRegistration"
+    AssociationOtherEnd="com.archemy.searchapp.model.assoc.KadRegisterToKadFkAssoc.KadIdKadRegistration"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="KadIdKadRegistration"
+    Association="com.archemy.searchapp.model.assoc.KadRegisterToKadFkAssoc"
+    AssociationEnd="com.archemy.searchapp.model.assoc.KadRegisterToKadFkAssoc.KadIdKadRegistration"
+    AssociationOtherEnd="com.archemy.searchapp.model.assoc.KadRegisterToKadFkAssoc.KadRegistration"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="Primary1"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="PRIMARY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.archemy.searchapp.model.entities.KadRegistrationEO.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="KadRegisterToKadFk">
+    <DesignTime>
+      <Attr Name="_isCascadeDelete" Value="true"/>
+      <Attr Name="_referencedKey" Value="PRIMARY"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="KAD_REGISTER_TO_KAD_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.archemy.searchapp.model.entities.KadRegistrationEO.KadId"/>
+    </AttrArray>
+  </Key>
+</Entity>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="KADDimensionsAreaTempVO"
+  Version="11.1.2.64.36"
+  BindingStyle="JDBC"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation"
+  RowClass="com.archemy.searchapp.model.queries.KADDimensionsAreaTempVORowImpl"
+  ComponentClass="com.archemy.searchapp.model.queries.KADDimensionsAreaTempVOImpl"
+  FetchMode="FETCH_AS_NEEDED"
+  MaxFetchSize="0">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.archemy.searchapp.model.queries.KADDimensionsAreaTempVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="DimensionsFilteredByDomainVO1"
+    ViewObjectName="com.archemy.searchapp.model.lookups.DimensionsFilteredByDomainVO"
+    RowLevelBinds="true"
+    FetchSize="100"/>
+  <ViewAccessor
+    Name="AreaChildLookupVO1"
+    ViewObjectName="com.archemy.searchapp.model.lookups.AreaChildLookupVO">
+    <ViewCriteriaUsage
+      Name="AreaChildLookupVOCriteria"
+      FullName="com.archemy.searchapp.model.lookups.AreaChildLookupVO.AreaChildLookupVOCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="bAreaParentId">
+        <TransientExpression><![CDATA[AreaId]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="bDimensionId">
+        <TransientExpression><![CDATA[DimensionId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ParentAreaIdLookupVO1"
+    ViewObjectName="com.archemy.searchapp.model.lookups.ParentAreaIdLookupVO"
+    FetchSize="100">
+    <ViewCriteriaUsage
+      Name="ParentAreaIdLookupVOCriteria"
+      FullName="com.archemy.searchapp.model.lookups.ParentAreaIdLookupVO.ParentAreaIdLookupVOCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="bDimensionId">
+        <TransientExpression><![CDATA[DimensionId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ParentAreaIdLookupProgVO1"
+    ViewObjectName="com.archemy.searchapp.model.lookups.ParentAreaIdLookupProgVO"
+    FetchSize="100">
+    <ViewCriteriaUsage
+      Name="ParentAreaIdLookupProgVOCriteria"
+      FullName="com.archemy.searchapp.model.lookups.ParentAreaIdLookupProgVO.ParentAreaIdLookupProgVOCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="bDimensionId">
+        <TransientExpression><![CDATA[DimensionId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_AreaChildId"
+    ListVOName="AreaChildLookupVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="AreaChildId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="AreaId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="AreaName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_DimensionId"
+    ListVOName="DimensionsFilteredByDomainVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DimensionId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DimensionId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DimensionName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_AreaId"
+    ListVOName="ParentAreaIdLookupProgVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="AreaId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="AreaId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="AreaName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ViewAttribute
+    Name="DimensionId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="$none$"
+    SQLType="INTEGER"
+    IsNotNull="true"
+    LOVName="LOV_DimensionId">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="DIMENSION"/>
+        <CONTROLTYPE
+          Value="choice"/>
+        <AUTOSUBMIT
+          Value="true"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AreaChildId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="$none$"
+    SQLType="INTEGER"
+    LOVName="LOV_AreaChildId">
+    <Dependencies>
+      <Item
+        Value="AreaId"/>
+      <Item
+        Value="DimensionId"/>
+    </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <LABEL
+          ResId="CHILD_AREA"/>
+        <AUTOSUBMIT
+          Value="true"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AreaId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="$none$"
+    SQLType="INTEGER"
+    LOVName="LOV_AreaId"
+    IsNotNull="true">
+    <Dependencies>
+      <Item
+        Value="DimensionId"/>
+    </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="70"/>
+        <CONTROLTYPE
+          Value="choice"/>
+        <AUTOSUBMIT
+          Value="true"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Weight"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="$none$"
+    SQLType="INTEGER"
+    DefaultValue="0">
+    <validation:RangeValidationBean
+      Name="Weight_Rule_0"
+      ResId="WEIGHT_MUST_BE_BETWEEN_0_AND_1"
+      OnAttribute="Weight"
+      OperandType="LITERAL"
+      Inverse="false"
+      MinValue="0"
+      MaxValue="100"/>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Closeness"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="$none$"
+    SQLType="INTEGER"
+    DefaultValue="100"/>
+  <ViewAttribute
+    Name="UUID"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="UUID"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.archemy.searchapp.model.ArchemyAppModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

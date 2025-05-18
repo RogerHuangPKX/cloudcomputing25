@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="archemyappviewBundle"
+         value="#{adfBundle['com.archemy.searchapp.view.ArchemyAppViewBundle']}"/>
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document title="Home" id="d1">
+        <af:messages id="m1"/>
+      <af:form id="f1" usesUpload="true">
+        <af:pageTemplate viewId="/oracle/templates/threeColumnTemplate.jspx" id="pt1">
+          <f:attribute name="logoImagePath" value="/images/archemy_logo_small.png"/>
+          <f:attribute name="logoShortDesc" value="Archemy"/>
+          <f:attribute name="headerGlobalSize" value="50"/>
+          <f:facet name="start">
+            <af:panelGroupLayout id="pg1" inlineStyle="padding:5px" layout="scroll">
+              <af:spacer id="spbig1" height="30"/>
+              <af:commandLink text="#{archemyappviewBundle.SEARCH_KNOWLEDGE_ARTIFACTS}"
+                              immediate="true" action="#{viewScope.NavBacking.checkChanges}" id="cl1">
+                <af:setPropertyListener to="#{viewScope.NavBacking.taskFlowId}"
+                                        from="/WEB-INF/taskflow/search-kad-task-flow-definition.xml#search-kad-task-flow-definition"
+                                        type="action"/>
+              </af:commandLink>
+              <af:spacer id="sp1" height="10"/>
+              <af:commandLink text="#{archemyappviewBundle.SEARCH_OR_ADD_CATALOG}" immediate="true"
+                              action="#{viewScope.NavBacking.checkChanges}" id="cl2">
+                <af:setPropertyListener to="#{viewScope.NavBacking.taskFlowId}"
+                                        from="/WEB-INF/taskflow/search-and-add-catalog-tf.xml#search-and-add-catalog-tf"
+                                        type="action"/>
+              </af:commandLink>
+              <af:spacer id="sp2" height="10"/>
+              <af:commandLink text="View Usage Statistics" immediate="true"
+                              action="#{viewScope.NavBacking.checkChanges}" id="cl6">
+                <af:setPropertyListener to="#{viewScope.NavBacking.taskFlowId}"
+                                        from="/WEB-INF/taskflow/view-usage-statistics-tf.xml#view-usage-statistics-tf"
+                                        type="action"/>
+              </af:commandLink>
+              <af:spacer id="sp34" height="10"/>
+              <af:commandLink text="Register KAD Usage" immediate="true"
+                              visible="#{FortressAllowed['register-kad-usage:View:Normal']}"
+                              action="#{viewScope.NavBacking.checkChanges}" id="cl7">
+                <af:setPropertyListener to="#{viewScope.NavBacking.taskFlowId}"
+                                        from="/WEB-INF/taskflow/register-kad-usage-task-flow-definition.xml#register-kad-usage-task-flow-definition"
+                                        type="action"/>
+              </af:commandLink>
+              <af:spacer id="sp33" height="10"/>
+              <af:commandLink text="#{archemyappviewBundle.MANAGE_DOMAINS}" immediate="true"
+                              visible="#{FortressAllowed['manage-domains:View:Admin']}"
+                              action="#{viewScope.NavBacking.checkChanges}" id="cl3">
+                <af:setPropertyListener to="#{viewScope.NavBacking.taskFlowId}"
+                                        from="/WEB-INF/taskflow/manage-domains-task-flow-definition.xml#add-domains-task-flow-definition"
+                                        type="action"/>
+              </af:commandLink>
+              <af:spacer id="sp3" height="10"/>
+              <af:commandLink text="#{archemyappviewBundle.MANAGE_DIMENSIONS}" immediate="true"
+                              visible="#{FortressAllowed['manage-dimensions:View:Admin']}"
+                              action="#{viewScope.NavBacking.checkChanges}" id="cl4">
+                <af:setPropertyListener to="#{viewScope.NavBacking.taskFlowId}"
+                                        from="/WEB-INF/taskflow/manage-dimensions-task-flow-definition.xml#manage-dimensions-task-flow-definition"
+                                        type="action"/>
+              </af:commandLink>
+              <af:spacer id="sp4" height="10"/>
+              <af:commandLink text="#{archemyappviewBundle.MANAGE_AREAS}" immediate="true"
+                              visible="#{FortressAllowed['manage-areas:View:Admin']}"
+                              action="#{viewScope.NavBacking.checkChanges}" id="cl5">
+                <af:setPropertyListener to="#{viewScope.NavBacking.taskFlowId}"
+                                        from="/WEB-INF/taskflow/manage-areas-task-flow-definition.xml#manage-areas-task-flow-definition"
+                                        type="action"/>
+              </af:commandLink>
+              <af:spacer id="sp55" height="10"/>
+              <af:commandLink text="Manage Business Problems"
+                              visible="#{FortressAllowed['manage-bus-probs:View:Admin']}"
+                              immediate="true" action="#{viewScope.NavBacking.checkChanges}"
+                              id="cl9">
+                <af:setPropertyListener to="#{viewScope.NavBacking.taskFlowId}"
+                                        from=" /WEB-INF/taskflow/recurring-business-problem-tf.xml#recurring-business-problem-tf"
+                                        type="action"/>
+              </af:commandLink>
+              <af:spacer id="sp222" height="10"/>
+              <af:commandLink visible="#{FortressAllowed['customer-profile:View:Normal']}"
+                              text="Customer Profile" immediate="true"
+                              action="#{viewScope.NavBacking.checkChanges}" id="cl10">
+                <af:setPropertyListener to="#{viewScope.NavBacking.taskFlowId}"
+                                        from="/WEB-INF/taskflow/edit-customer-info-tf.xml#edit-customer-info-tf"
+                                        type="action"/>
+              </af:commandLink>
+              <af:spacer id="sp223" height="10"/>
+              <af:commandLink visible="#{FortressAllowed['customer-info:View:Admin']}"
+                              text="View Customer Info"
+                              action="#{viewScope.NavBacking.checkChanges}" id="cl11">
+                <af:setPropertyListener to="#{viewScope.NavBacking.taskFlowId}"
+                                        from="  /WEB-INF/taskflow/view-customer-info-task-flow-definition.xml#view-customer-info-task-flow-definition"
+                                        type="action"/>
+              </af:commandLink>
+                 <af:popup id="pp3" animate="default" childCreation="deferred"
+                             clientComponent="true" binding="#{viewScope.NavBacking.popup}">
+                    <af:dialog id="dg1" closeIconVisible="false" type="none"
+                               title="Uncommitted Data Warning">
+                      <f:facet name="buttonBar">
+                        <af:toolbar id="tb1">
+                          <af:commandButton id="cb1" text="OK" immediate="true"
+                                            action="#{viewScope.NavBacking.okAction}"/>
+                          <af:commandButton id="cb2" text="CANCEL" immediate="true" action=" "/>
+                        </af:toolbar>
+                      </f:facet>
+                      <af:inputText id="opt1" readOnly="true" wrap="hard"
+                                    value="If you click ok changes will be lost."/>
+                      <af:spacer id="sp122" height="5"/>
+                    </af:dialog>
+                  </af:popup>
+            </af:panelGroupLayout>
+          </f:facet>
+          <f:facet name="center">
+            <af:panelStretchLayout id="pd343">
+              <f:facet name="center">
+                  <af:region value="#{bindings.dynamicRegion1.regionModel}" id="r1"
+                             partialTriggers="::cl1 ::cl2 ::cl3 ::cl4 ::cl5 ::cl6 ::cl7 ::cl9 ::cl9 ::cl10 ::cl11"/>
+              </f:facet>
+            </af:panelStretchLayout>
+          </f:facet>
+          <f:facet name="end">
+            <af:showDetail disclosed="true" id="sd2"
+                           disclosedText="#{archemyappviewBundle.QUICK_LINKS}"
+                           undisclosedText="#{archemyappviewBundle.QUICK_LINKS}" visible="true">
+              <af:spacer width="20" height="20" id="s1"/>
+              <af:commandLink text="#{archemyappviewBundle.CHANGE_PASSWORD}" immediate="true"
+                       action="#{viewScope.NavBacking.checkChanges}"        id="cl8">
+                <af:setPropertyListener type="action"
+                                        from="/WEB-INF/taskflow/change-password-task-flow-definition.xml#change-password-task-flow-definition"
+                                        to="#{viewScope.NavBacking.taskFlowId}"/>
+              </af:commandLink>
+            </af:showDetail>
+          </f:facet>
+          <f:facet name="status">
+            <af:panelGroupLayout layout="horizontal" id="pg65" styleClass="AFStretchWidth"
+                                 valign="bottom" halign="right">
+              <af:commandLink text="#{archemyappviewBundle.LOGOUT}" visible="true" immediate="true"
+                              action="#{LoginBean.doLogout}" id="c56"></af:commandLink>
+            </af:panelGroupLayout>
+          </f:facet>
+        </af:pageTemplate>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

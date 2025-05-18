@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="archemyappviewBundle"
+         value="#{adfBundle['com.archemy.searchapp.view.ArchemyAppViewBundle']}"/>
+  <af:panelStretchLayout id="psl1">
+    <f:facet name="center">
+      <af:panelGroupLayout layout="scroll" id="pgl1">
+        <af:panelHeader text="Manage Areas" id="ph1">
+          <af:query id="qryId1" headerText="Search" disclosed="true"
+                    value="#{bindings.ImplicitViewCriteriaQuery.queryDescriptor}"
+                    model="#{bindings.ImplicitViewCriteriaQuery.queryModel}"
+                    queryListener="#{bindings.ImplicitViewCriteriaQuery.processQuery}"
+                    queryOperationListener="#{bindings.ImplicitViewCriteriaQuery.processQueryOperation}"
+                    resultComponentId="::pc1:resId1"/>
+        </af:panelHeader>
+        <af:panelCollection id="pc1" styleClass="AFStretchWidth" featuresOff="viewMenu detach">
+          <f:facet name="toolbar">
+            <af:toolbar id="tbl1">
+              <af:commandButton actionListener="#{bindings.CreateInsert.execute}"
+                                text="#{archemyappviewBundle.ADD_AREA}"
+                               id="cb1"/>
+              <af:commandButton actionListener="#{bindings.Delete.execute}"
+                                text="#{archemyappviewBundle.DELETE_AREA}"
+                                id="cb2"/>
+              <af:commandButton actionListener="#{bindings.Commit.execute}" text="Commit"
+                                id="cb3"/>
+              <af:commandButton actionListener="#{bindings.Rollback.execute}" text="Rollback"
+                                 immediate="true" id="cb4">
+                <af:resetActionListener/>
+              </af:commandButton>
+            </af:toolbar>
+          </f:facet>
+          <af:table value="#{bindings.AreasVO2.collectionModel}" var="row"
+                    rows="#{bindings.AreasVO2.rangeSize}"
+                    emptyText="#{bindings.AreasVO2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    fetchSize="#{bindings.AreasVO2.rangeSize}" rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.AreasVO2.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.AreasVO2.collectionModel.makeCurrent}"
+                    rowSelection="single" id="resId1" partialTriggers="::cb1 ::cb2 ::cb3">
+            <af:column sortProperty="#{bindings.AreasVO2.hints.DimensionId.name}" sortable="false"
+                       headerText="#{archemyappviewBundle.DIMENSION_NAME}" id="resId1c4">
+              <af:selectOneChoice value="#{row.bindings.DimensionId.inputValue}"
+                                  label="#{row.bindings.DimensionId.label}" autoSubmit="true"
+                                  required="#{bindings.AreasVO2.hints.DimensionId.mandatory}"
+                                  shortDesc="#{bindings.AreasVO2.hints.DimensionId.tooltip}"
+                                  readOnly="false" id="soc2">
+                <f:selectItems value="#{row.bindings.DimensionId.items}" id="si2"/>
+              </af:selectOneChoice>
+            </af:column>
+            <af:column sortProperty="#{bindings.AreasVO2.hints.AreaName.name}" sortable="false"
+                       headerText="#{archemyappviewBundle.AREA_NAME}" id="resId1c5">
+              <af:inputText value="#{row.AreaName}"
+                            required="#{bindings.AreasVO2.hints.AreaName.mandatory}"
+                         autoSubmit="true"    columns="#{bindings.AreasVO2.hints.AreaName.displayWidth}"
+                            maximumLength="#{bindings.AreasVO2.hints.AreaName.precision}"
+                            shortDesc="#{bindings.AreasVO2.hints.AreaName.tooltip}" id="ot3">
+                <f:validator binding="#{row.bindings.AreaName.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.AreasVO2.hints.AreaOrderNo.name}" sortable="false"
+                       headerText="#{archemyappviewBundle.AREA_ORDER}" id="resId1c2">
+              <af:inputText value="#{row.AreaOrderNo}"
+                 required="#{bindings.AreasVO2.hints.AreaOrderNo.mandatory}"
+                            columns="#{bindings.AreasVO2.hints.AreaOrderNo.displayWidth}"
+                       autoSubmit="true"      maximumLength="#{bindings.AreasVO2.hints.AreaOrderNo.precision}"
+                            shortDesc="#{bindings.AreasVO2.hints.AreaOrderNo.tooltip}" id="ot1">
+                             <f:validator binding="#{row.bindings.AreaOrderNo.validator}"/>
+                            </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.AreasVO2.hints.AreaParentId.name}" sortable="false"
+                       headerText="#{archemyappviewBundle.PARENT_AREA}" id="resId1c1">
+              <af:selectOneChoice value="#{row.bindings.AreaParentId.inputValue}" autoSubmit="true"
+                                label="#{row.bindings.AreaParentId.label}"
+                                  valueChangeListener="#{pageFlowScope.ManageAreasBacking.onParentSelected}"
+                               partialTriggers="soc2"   required="#{bindings.AreasVO2.hints.AreaParentId.mandatory}"
+                                  shortDesc="#{bindings.AreasVO2.hints.AreaParentId.tooltip}"
+                                  readOnly="false" id="soc1">
+                <f:selectItems value="#{row.bindings.AreaParentId.items}" id="si1"/>
+              </af:selectOneChoice>
+            </af:column>
+            <af:column sortProperty="#{bindings.AreasVO2.hints.AreaDepthLevel.name}"
+                       sortable="false" headerText="#{bindings.AreasVO2.hints.AreaDepthLevel.label}"
+                       id="resId1c3">
+              <af:inputText value="#{row.AreaDepthLevel}" 
+                    partialTriggers="soc1"   readOnly="true"  clientComponent="true"   shortDesc="#{bindings.AreasVO2.hints.AreaDepthLevel.tooltip}" id="ot2">
+              
+              </af:inputText>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:panelStretchLayout>
+</jsp:root>

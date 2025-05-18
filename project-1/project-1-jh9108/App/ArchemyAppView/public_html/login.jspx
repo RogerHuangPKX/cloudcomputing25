@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="archemyappviewBundle" value="#{adfBundle['com.archemy.searchapp.view.ArchemyAppViewBundle']}"/>
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="login.jspx" id="d1">
+            <af:form id="f1">
+                <af:panelGroupLayout id="pg1" layout="horizontal" halign="center">
+                    <af:spacer height="500" id="sp23"/>
+                    <af:popup id="pp3" binding="#{LoginBean.popUp}" animate="default" childCreation="immediate"
+                              partialTriggers="cb1" clientComponent="true">
+                        <af:dialog id="dg1" closeIconVisible="false" type="none" partialTriggers="cb1"
+                                   title="#{archemyappviewBundle.LOGIN_FAILED}">
+                            <af:outputText id="opt1" value="#{pageFlowScope.errorMessage}"/>
+                            <af:spacer id="sp2" height="5"/>
+                            <af:commandButton id="cb5" text="#{archemyappviewBundle.OK}"
+                                              visible="#{not pageFlowScope.expireWarning}" action="none"/>
+                            <af:commandButton id="cb6" partialSubmit="true" visible="#{pageFlowScope.expireWarning}"
+                                              text="#{archemyappviewBundle.CHANGE_PASSWORD}" action="changePassword"/>
+                            <af:commandButton id="cb7" partialSubmit="true" visible="#{pageFlowScope.expireWarning}"
+                                              text="#{archemyappviewBundle.CONTINUE}" action="success"/>
+                        </af:dialog>
+                    </af:popup>
+                    <af:panelGroupLayout layout="vertical" halign="center" id="pg343">
+                        <af:image shortDesc="compLogo" id="img1" source="/images/archemy_logo.png"/>
+                        <af:panelBox text="#{archemyappviewBundle.LOGIN}" id="pb1" showDisclosure="false"
+                                     titleHalign="center" ramp="highlight">
+                            <af:spacer height="60" id="sp22"/>
+                            <af:panelGroupLayout id="pg2" layout="vertical" halign="center" styleClass="AFStretchWidth"
+                                                 valign="middle">
+                                <af:inputText label="#{archemyappviewBundle.USER_ID}" id="it1" required="true"
+                                              maximumLength="50" binding="#{LoginBean.userName}"/>
+                                <af:spacer height="25" id="sp24"/>
+                                <af:inputText label="#{archemyappviewBundle.PASSWORD}" id="it2" secret="true"
+                                              required="true" maximumLength="50" binding="#{LoginBean.password}"/>
+                                <af:spacer height="25" id="sp271"/>
+                                <af:inputText label="#{archemyappviewBundle.LICENSE_KEY}" id="it3" secret="false"
+                                              required="false" maximumLength="50" binding="#{LoginBean.licenseKey}"/>
+                                <af:spacer height="50" id="sp28"/>
+                                <af:commandButton text="#{archemyappviewBundle.LOGIN}" id="cb1"
+                                                  action="#{LoginBean.doLogin}"/>
+                                <!-- <af:spacer height="20" id="sp31"/>-->
+                                <!-- <af:commandLink text="#{equatesecurityappviewBundle.FORGOT_PASSWORD_}" id="cb2"
+                                     immediate="true" action="#{LoginBean.doLogin}"/>
+                                          <af:spacer height="20" id="sp32"/> -->
+                                <af:spacer height="50" id="sp25"/>
+                            </af:panelGroupLayout>
+                            <f:facet name="toolbar"/>
+                        </af:panelBox>
+                    </af:panelGroupLayout>
+                    <af:spacer height="300" id="sp29"/>
+                </af:panelGroupLayout>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>

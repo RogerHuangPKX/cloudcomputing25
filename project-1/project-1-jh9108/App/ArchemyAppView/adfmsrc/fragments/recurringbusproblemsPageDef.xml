@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="recurringbusproblemsPageDef" Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="RecurringBusProblemVO2" RangeSize="25" DataControl="ArchemySearchAMDataControl"
+              id="RecurringBusProblemVO2Iterator"/>
+    <searchRegion
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="RecurringBusProblemVO2Iterator" id="ImplicitViewCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <action IterBinding="RecurringBusProblemVO2Iterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="RecurringBusProblemVO2Iterator" id="Delete" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="ArchemySearchAMDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="ArchemySearchAMDataControl"/>
+    <tree IterBinding="RecurringBusProblemVO2Iterator" id="RecurringBusProblemVO21">
+      <nodeDefinition DefName="com.archemy.searchapp.model.queries.RecurringBusProblemVO"
+                      Name="RecurringBusProblemVO210">
+        <AttrNames>
+          <Item Value="BusinessProblem"/>
+          <Item Value="Id"/>
+          <Item Value="Context"/>
+          <Item Value="Description"/>
+          <Item Value="Type"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

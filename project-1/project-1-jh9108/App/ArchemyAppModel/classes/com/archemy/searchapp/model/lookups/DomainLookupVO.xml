@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DomainLookupVO"
+  Version="11.1.2.64.36"
+  SelectList="DomainsEO.DOMAIN_DESCRIPTION, 
+       DomainsEO.DOMAIN_ID, 
+       DomainsEO.DOMAIN_NAME"
+  FromList="domains DomainsEO"
+  BindingStyle="JDBC"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  RowClass="com.archemy.searchapp.model.lookups.DomainLookupVORowImpl"
+  ComponentClass="com.archemy.searchapp.model.lookups.DomainLookupVOImpl"
+  FetchSize="50">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.archemy.searchapp.model.lookups.DomainLookupVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <EntityUsage
+    Name="DomainsEO"
+    Entity="com.archemy.searchapp.model.entities.DomainsEO"/>
+  <ViewAttribute
+    Name="DomainDescription"
+    PrecisionRule="true"
+    EntityAttrName="DomainDescription"
+    EntityUsage="DomainsEO"
+    AliasName="DOMAIN_DESCRIPTION"/>
+  <ViewAttribute
+    Name="DomainId"
+    IsUpdateable="while_insert"
+    PrecisionRule="true"
+    EntityAttrName="DomainId"
+    EntityUsage="DomainsEO"
+    AliasName="DOMAIN_ID"/>
+  <ViewAttribute
+    Name="DomainName"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="DomainName"
+    EntityUsage="DomainsEO"
+    AliasName="DOMAIN_NAME"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.archemy.searchapp.model.ArchemyAppModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

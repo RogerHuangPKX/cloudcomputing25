@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="archemyappviewBundle"
+         value="#{adfBundle['com.archemy.searchapp.view.ArchemyAppViewBundle']}"/>
+  <af:panelStretchLayout id="psl1">
+    <f:facet name="center">
+      <af:panelFormLayout id="pfl1">
+        <af:inputText value="#{bindings.CustomerName.inputValue}"
+                      label="#{archemyappviewBundle.CUSTOMER_NAME}"
+                      required="#{bindings.CustomerName.hints.mandatory}"
+                      columns="#{bindings.CustomerName.hints.displayWidth}"
+                      maximumLength="#{bindings.CustomerName.hints.precision}"
+                      shortDesc="#{bindings.CustomerName.hints.tooltip}" id="it1">
+          <f:validator binding="#{bindings.CustomerName.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.Industry.inputValue}"
+                      label="#{bindings.Industry.hints.label}"
+                      required="#{bindings.Industry.hints.mandatory}"
+                      columns="#{bindings.Industry.hints.displayWidth}"
+                      maximumLength="#{bindings.Industry.hints.precision}"
+                      shortDesc="#{bindings.Industry.hints.tooltip}" id="it2">
+          <f:validator binding="#{bindings.Industry.validator}"/>
+        </af:inputText>
+        <f:facet name="footer">
+          <af:commandButton  actionListener="#{bindings.Commit.execute}" text="Save"
+                            id="cb1"/>
+        </f:facet>
+      </af:panelFormLayout>
+    </f:facet>
+  </af:panelStretchLayout>
+</jsp:root>

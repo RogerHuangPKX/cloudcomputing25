@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="archemyappviewBundle"
+         value="#{adfBundle['com.archemy.searchapp.view.ArchemyAppViewBundle']}"/>
+  <af:panelStretchLayout id="psl1">
+    <f:facet name="center">
+     <af:panelGroupLayout layout="scroll" id="pg1">
+        <af:panelGroupLayout layout="vertical" id="pgl1">
+            <af:query id="qryId1" headerText="#{archemyappviewBundle.SEARCH_DIMENSIONS}" disclosed="true"
+                      value="#{bindings.ImplicitViewCriteriaQuery.queryDescriptor}"
+                      model="#{bindings.ImplicitViewCriteriaQuery.queryModel}"
+                      queryListener="#{bindings.ImplicitViewCriteriaQuery.processQuery}"
+                      queryOperationListener="#{bindings.ImplicitViewCriteriaQuery.processQueryOperation}"
+                      resultComponentId="::pc1:resId1"/>
+          <af:panelCollection id="pc1" styleClass="AFStretchWidth" featuresOff="viewMenu detach">      
+          <f:facet name="toolbar">
+          <af:toolbar id="tbl1">
+                <af:commandButton actionListener="#{bindings.CreateInsert.execute}"
+                                  text="#{archemyappviewBundle.ADD_A_DIMENSION}" 
+                                  id="cb1"/>
+                <af:commandButton actionListener="#{bindings.Delete.execute}"
+                                  text="#{archemyappviewBundle.DELETE_DIMENSION}"
+                              id="cb2"/>
+                <af:commandButton actionListener="#{bindings.Commit.execute}" text="Commit"
+                                  id="cb3"/>
+                <af:commandButton actionListener="#{bindings.Rollback.execute}" text="Rollback"
+                                 immediate="true"
+                                  id="cb4">
+                  <af:resetActionListener/>
+                </af:commandButton>
+              </af:toolbar>
+          </f:facet>
+          <af:table value="#{bindings.DimensionsVO2.collectionModel}" var="row"
+                    rows="#{bindings.DimensionsVO2.rangeSize}"
+                    rowSelection="single"
+                    selectedRowKeys="#{bindings.DimensionsVO2.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.DimensionsVO2.collectionModel.makeCurrent}"
+                    emptyText="#{bindings.DimensionsVO2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    fetchSize="#{bindings.DimensionsVO2.rangeSize}" rowBandingInterval="0"
+                    id="resId1" partialTriggers="::cb1 ::cb2">
+              <af:column sortProperty="#{bindings.DimensionsVO2.hints.DomainId.name}"
+                         sortable="false" headerText="#{archemyappviewBundle.DOMAIN_NAME}"
+                         id="resId1c3">
+                <af:selectOneChoice value="#{row.bindings.DomainId.inputValue}"
+                                    label="#{archemyappviewBundle.DOMAIN_NAME}"
+                             autoSubmit="true" 
+                             required="#{bindings.DimensionsVO2.hints.DomainId.mandatory}"
+                                    shortDesc="#{bindings.DimensionsVO2.hints.DomainId.tooltip}"
+                                    readOnly="false" id="soc1">
+                  <f:selectItems value="#{row.bindings.DomainId.items}" id="si1"/>
+                </af:selectOneChoice>
+              </af:column>
+              <af:column sortProperty="#{bindings.DimensionsVO2.hints.DimensionName.name}"
+                       sortable="false"
+                       headerText="#{archemyappviewBundle.DIMENSION_NAME}"
+                       id="resId1c2">
+              <af:inputText value="#{row.DimensionName}"
+                        autoSubmit="true"      
+                        shortDesc="#{bindings.DimensionsVO2.hints.DimensionName.tooltip}"
+                             id="ot2"/>
+            </af:column>
+          </af:table>
+          </af:panelCollection>
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:panelStretchLayout>
+</jsp:root>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="KadsEO"
+  Version="11.1.2.64.36"
+  DBObjectType="table"
+  DBObjectName="kads"
+  AliasName="KadsEO"
+  BindingStyle="JDBC"
+  UseGlueCode="false"
+  RowClass="com.archemy.searchapp.model.entities.KadsEOImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_superClass" Value="com.archemy.searchapp.model.entities.AutoIncrementEntityImpl"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="KadId"
+    ColumnName="KAD_ID"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="kads"
+    PrimaryKey="true"
+    IsUpdateable="while_insert"
+    Domain="com.archemy.searchapp.model.AutoIncrementPropertySet">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="KadName"
+    Precision="100"
+    ColumnName="KAD_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR"
+    TableName="kads">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="DomainId"
+    ColumnName="DOMAIN_ID"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="kads">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="KadLink"
+    Precision="300"
+    ColumnName="KAD_LINK"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR"
+    TableName="kads">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="300"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="KadLinkPublic"
+    Precision="300"
+    ColumnName="KAD_LINK_PUBLIC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR"
+    TableName="kads">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="300"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="KadHitCounter"
+    ColumnName="KAD_HIT_COUNTER"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="kads">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="RecurringBusProblemId"
+    ColumnName="RECURRING_BUS_PROBLEM_ID"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="kads"
+    IsNotNull="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="Kads"
+    Association="com.archemy.searchapp.model.assoc.KadDomainIdFkAssoc"
+    AssociationEnd="com.archemy.searchapp.model.assoc.KadDomainIdFkAssoc.Kads"
+    AssociationOtherEnd="com.archemy.searchapp.model.assoc.KadDomainIdFkAssoc.DomainIdKads"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="DomainIdKads"
+    Association="com.archemy.searchapp.model.assoc.KadDomainIdFkAssoc"
+    AssociationEnd="com.archemy.searchapp.model.assoc.KadDomainIdFkAssoc.DomainIdKads"
+    AssociationOtherEnd="com.archemy.searchapp.model.assoc.KadDomainIdFkAssoc.Kads"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="Primary1"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="PRIMARY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.archemy.searchapp.model.entities.KadsEO.KadId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="KadDomainIdFk">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PRIMARY"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="KAD_DOMAIN_ID_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.archemy.searchapp.model.entities.KadsEO.DomainId"/>
+    </AttrArray>
+  </Key>
+</Entity>

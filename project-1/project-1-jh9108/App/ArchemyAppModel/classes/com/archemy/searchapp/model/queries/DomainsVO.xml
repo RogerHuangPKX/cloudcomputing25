@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DomainsVO"
+  Version="11.1.2.64.36"
+  SelectList="DomainsEO.DOMAIN_ID, 
+       DomainsEO.DOMAIN_NAME, 
+       DomainsEO.DOMAIN_DESCRIPTION"
+  FromList="domains DomainsEO"
+  BindingStyle="JDBC"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FetchSize="50">
+  <EntityUsage
+    Name="DomainsEO"
+    Entity="com.archemy.searchapp.model.entities.DomainsEO"/>
+  <ViewAttribute
+    Name="DomainId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="DomainId"
+    EntityUsage="DomainsEO"
+    AliasName="DOMAIN_ID"
+    IsUpdateable="while_insert"/>
+  <ViewAttribute
+    Name="DomainName"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="DomainName"
+    EntityUsage="DomainsEO"
+    AliasName="DOMAIN_NAME"/>
+  <ViewAttribute
+    Name="DomainDescription"
+    PrecisionRule="true"
+    EntityAttrName="DomainDescription"
+    EntityUsage="DomainsEO"
+    AliasName="DOMAIN_DESCRIPTION"/>
+</ViewObject>

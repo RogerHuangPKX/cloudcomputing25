@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="manage-areas-task-flow-definition">
+    <default-activity>executeEmptyRowSet</default-activity>
+    <managed-bean id="__3">
+      <managed-bean-name>ManageAreasBacking</managed-bean-name>
+      <managed-bean-class>com.archemy.searchapp.view.beans.ManageAreasBacking</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <method-call id="executeEmptyRowSet">
+      <method>#{bindings.executeEmptyRowSet.execute}</method>
+      <outcome>
+        <fixed-outcome>executeEmptyRowSet</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="manage-areas">
+      <page>/fragments/manage-areas.jsff</page>
+    </view>
+    <control-flow-rule id="__1">
+      <from-activity-id>executeEmptyRowSet</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>executeEmptyRowSet</from-outcome>
+        <to-activity-id>manage-areas</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

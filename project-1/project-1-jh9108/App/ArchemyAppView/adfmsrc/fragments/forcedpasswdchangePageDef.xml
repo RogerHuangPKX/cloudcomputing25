@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="forcedpasswdchangePageDef" Package="fragments">
+<parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PwPolicyTrVO2" RangeSize="25"
+              DataControl="ArchemySearchAMDataControl"
+              id="PwPolicyTrVO2Iterator"/>
+  </executables>
+  <bindings>
+    <list IterBinding="PwPolicyTrVO2Iterator" id="UserChangePwd"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="UserChangePwd"/>
+      </AttrNames>
+    </list>
+    <attributeValues IterBinding="PwPolicyTrVO2Iterator" id="ExpireWarningDays">
+      <AttrNames>
+        <Item Value="ExpireWarningDays"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PwPolicyTrVO2Iterator"
+                     id="FailureCountInterval">
+      <AttrNames>
+        <Item Value="FailureCountInterval"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PwPolicyTrVO2Iterator" id="GraceLoginLimit">
+      <AttrNames>
+        <Item Value="GraceLoginLimit"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PwPolicyTrVO2Iterator" id="PwdInHistory">
+      <AttrNames>
+        <Item Value="PwdInHistory"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="PwPolicyTrVO2Iterator" id="AccountLockoutEnabled"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="AccountLockoutEnabled"/>
+      </AttrNames>
+    </list>
+    <attributeValues IterBinding="PwPolicyTrVO2Iterator"
+                     id="AccountLockoutDuration">
+      <AttrNames>
+        <Item Value="AccountLockoutDuration"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PwPolicyTrVO2Iterator" id="MaxAge">
+      <AttrNames>
+        <Item Value="MaxAge"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PwPolicyTrVO2Iterator" id="MaxFailure">
+      <AttrNames>
+        <Item Value="MaxFailure"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PwPolicyTrVO2Iterator" id="MinAge">
+      <AttrNames>
+        <Item Value="MinAge"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PwPolicyTrVO2Iterator" id="MinLength">
+      <AttrNames>
+        <Item Value="MinLength"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="PwPolicyTrVO2Iterator" id="MustChange"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="MustChange"/>
+      </AttrNames>
+    </list>
+    <attributeValues IterBinding="PwPolicyTrVO2Iterator" id="Name">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="PwPolicyTrVO2Iterator" id="SafeModify"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="SafeModify"/>
+      </AttrNames>
+    </list>
+    <methodAction id="changePasswordForUser"
+                  InstanceName="data.ArchemySearchAMDataControl.dataProvider"
+                  DataControl="ArchemySearchAMDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="changePasswordForUser" IsViewObjectMethod="false">
+      <NamedData NDName="userId" NDType="java.lang.String"/>
+      <NamedData NDName="password" NDType="java.lang.String"/>
+      <NamedData NDName="newPassword" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+  </pageDefinition>

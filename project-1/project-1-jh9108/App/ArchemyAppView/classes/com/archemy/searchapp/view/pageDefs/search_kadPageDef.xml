@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="search_kadPageDef" Package="com.archemy.searchapp.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="KadsVO3" RangeSize="25" DataControl="ArchemySearchAMDataControl"
+              id="KadsVO3Iterator"/>
+    <searchRegion Criteria="__ImplicitViewCriteria__"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="KadsVO3Iterator" id="ImplicitViewCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="KadsVO3Iterator" id="KadsVO3">
+      <nodeDefinition DefName="com.archemy.searchapp.model.queries.KadsVO" Name="KadsVO30">
+        <AttrNames>
+          <Item Value="KadId"/>
+          <Item Value="KadName"/>
+          <Item Value="DomainId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

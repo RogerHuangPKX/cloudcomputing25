@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1">
+    <f:facet name="center">
+      <af:panelGroupLayout layout="scroll" id="pgl2">
+          <af:panelHeader text="Customer Information" id="ph1">
+            <af:query id="qryId1" headerText="Search" disclosed="true"
+                      value="#{bindings.ImplicitViewCriteriaQuery.queryDescriptor}"
+                      model="#{bindings.ImplicitViewCriteriaQuery.queryModel}"
+                      queryListener="#{bindings.ImplicitViewCriteriaQuery.processQuery}"
+                      queryOperationListener="#{bindings.ImplicitViewCriteriaQuery.processQueryOperation}"
+                      resultComponentId="::pc1:resId1"/>
+          </af:panelHeader>
+           <af:panelCollection id="pc1" styleClass="AFStretchWidth" featuresOff="detach">
+          <af:table value="#{bindings.CustomerInfoAllVO1.collectionModel}" var="row"
+                    rows="#{bindings.CustomerInfoAllVO1.rangeSize}"
+                    emptyText="#{bindings.CustomerInfoAllVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    fetchSize="#{bindings.CustomerInfoAllVO1.rangeSize}" rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.CustomerInfoAllVO1.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.CustomerInfoAllVO1.collectionModel.makeCurrent}"
+                    rowSelection="single" id="resId1">
+            <af:column sortProperty="#{bindings.CustomerInfoAllVO1.hints.CustomerName.name}"
+                       sortable="true"
+                       headerText="#{bindings.CustomerInfoAllVO1.hints.CustomerName.label}"
+                       id="resId1c1">
+              <af:outputText value="#{row.CustomerName}"
+                             shortDesc="#{bindings.CustomerInfoAllVO1.hints.CustomerName.tooltip}"
+                             id="ot1"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.CustomerInfoAllVO1.hints.Industry.name}"
+                       sortable="true"
+                       headerText="#{bindings.CustomerInfoAllVO1.hints.Industry.label}"
+                       id="resId1c2">
+              <af:outputText value="#{row.Industry}"
+                             shortDesc="#{bindings.CustomerInfoAllVO1.hints.Industry.tooltip}"
+                             id="ot2"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.CustomerInfoAllVO1.hints.UserId.name}"
+                       sortable="true"
+                       headerText="#{bindings.CustomerInfoAllVO1.hints.UserId.label}" id="resId1c3">
+              <af:outputText value="#{row.UserId}"
+                             shortDesc="#{bindings.CustomerInfoAllVO1.hints.UserId.tooltip}"
+                             id="ot3"/>
+            </af:column>
+          </af:table>
+            </af:panelCollection>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:panelStretchLayout>
+</jsp:root>

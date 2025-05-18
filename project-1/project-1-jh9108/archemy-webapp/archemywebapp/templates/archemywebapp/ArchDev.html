@@ -1,0 +1,15 @@
+{% extends "archemywebapp/header.html" %}
+
+    {% load django_bootstrap_breadcrumbs %}
+
+    {% block breadcrumbs %}
+        {{ block.super }}
+        {% breadcrumb "Architecture Development" "/ArchDev/" %}
+    {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Architecture Development Page</h1>
+    <p>This is the content for the Architecture Development page. It will be filled in later.</p>
+</div>
+{% endblock %}

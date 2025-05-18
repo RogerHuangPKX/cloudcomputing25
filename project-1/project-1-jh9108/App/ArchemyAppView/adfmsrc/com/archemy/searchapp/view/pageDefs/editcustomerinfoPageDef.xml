@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="editcustomerinfoPageDef" Package="com.archemy.searchapp.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="CustomerInfoVO1" RangeSize="25" DataControl="ArchemySearchAMDataControl"
+              id="CustomerInfoVO1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="CustomerInfoVO1Iterator" id="CustomerName">
+      <AttrNames>
+        <Item Value="CustomerName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CustomerInfoVO1Iterator" id="Industry">
+      <AttrNames>
+        <Item Value="Industry"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="ArchemySearchAMDataControl"/>
+  </bindings>
+</pageDefinition>

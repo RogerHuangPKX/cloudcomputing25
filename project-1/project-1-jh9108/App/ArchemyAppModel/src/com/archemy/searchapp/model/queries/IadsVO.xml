@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="IadsVO"
+  Version="11.1.2.64.36"
+  SelectList="IadsEO.IAD_ID, 
+       IadsEO.IAD_NAME, 
+       IadsEO.IAD_TYPE, 
+       IadsEO.DOMAIN_ID, 
+       IadsEO.KAD_ID"
+  FromList="iads IadsEO"
+  BindingStyle="JDBC"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <Variable
+    Name="bDomainId"
+    Kind="viewcriteria"
+    Type="java.lang.Integer">
+    <AttrArray Name="ExtendedDataInts">
+      <Item Value="0"/>
+    </AttrArray>
+  </Variable>
+  <Variable
+    Name="bKadId"
+    Kind="viewcriteria"
+    Type="java.lang.Integer">
+    <AttrArray Name="ExtendedDataInts">
+      <Item Value="1"/>
+    </AttrArray>
+  </Variable>
+  <ViewAccessor
+    Name="KadsVO1"
+    ViewObjectName="com.archemy.searchapp.model.queries.KadsVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="DomainsVO1"
+    ViewObjectName="com.archemy.searchapp.model.queries.DomainsVO"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_DomainId"
+    ListVOName="DomainsVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DomainId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DomainId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DomainName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_KadId"
+    ListVOName="KadsVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="KadId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="KadId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="KadName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="IadsEO"
+    Entity="com.archemy.searchapp.model.entities.IadsEO"/>
+  <ViewAttribute
+    Name="IadId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="IadId"
+    EntityUsage="IadsEO"
+    AliasName="IAD_ID"
+    IsUpdateable="while_insert"/>
+  <ViewAttribute
+    Name="IadName"
+    PrecisionRule="true"
+    EntityAttrName="IadName"
+    EntityUsage="IadsEO"
+    AliasName="IAD_NAME"/>
+  <ViewAttribute
+    Name="IadType"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="IadType"
+    EntityUsage="IadsEO"
+    AliasName="IAD_TYPE"/>
+  <ViewAttribute
+    Name="DomainId"
+    PrecisionRule="true"
+    EntityAttrName="DomainId"
+    EntityUsage="IadsEO"
+    AliasName="DOMAIN_ID"
+    LOVName="LOV_DomainId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="KadId"
+    PrecisionRule="true"
+    EntityAttrName="KadId"
+    EntityUsage="IadsEO"
+    AliasName="KAD_ID"
+    LOVName="LOV_KadId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="IadsVOCriteria"
+    ViewObjectName="com.archemy.searchapp.model.queries.IadsVO"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="IadsVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="DomainId"
+        ViewAttribute="DomainId"
+        Operator="="
+        Conjunction="AND"
+        Value=":bDomainId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="KadId"
+        ViewAttribute="KadId"
+        Operator="="
+        Conjunction="AND"
+        Value=":bKadId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewLinkAccessor
+    Name="Iads"
+    ViewLink="com.archemy.searchapp.model.viewlink.IadKadIdFkVL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="Iads1"
+    ViewLink="com.archemy.searchapp.model.viewlink.IadDomainIdFkVL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+</ViewObject>

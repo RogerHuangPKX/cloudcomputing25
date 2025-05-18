@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="search_kad_task_flow_definition_search_kad_task_flow_definition_executeEmptyRowSetPageDef"
+                Package="taskflow" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="executeEmptyRowSet" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="executeEmptyRowSet" IsViewObjectMethod="false"
+                  DataControl="ArchemySearchAMDataControl"
+                  InstanceName="data.ArchemySearchAMDataControl.dataProvider"
+                  ReturnName="data.ArchemySearchAMDataControl.methodResults.executeEmptyRowSet_ArchemySearchAMDataControl_dataProvider_executeEmptyRowSet_result">
+      <NamedData NDName="voName" NDValue="KadsVO3" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,9 @@
+{% extends "archemywebapp/header.html" %}
+
+    {% load django_bootstrap_breadcrumbs %}
+
+    {% block breadcrumbs %}
+        {{ block.super }}
+        {% breadcrumb "Architecture Evolution Lifecycle" "/AEL/" %}
+        {% breadcrumb "Inception" "/AEL/inception//" %}
+    {% endblock %}

@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <MethodCall
+      id="MethodCall2">
+      <property
+         name="activityId">executeEmptyRowSet</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>executeEmptyRowSet&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">134.14941</property>
+      <property
+         name="x">179.02734</property>
+   </MethodCall>
+   <View
+      id="View3">
+      <property
+         name="activityId">recurringbusproblems</property>
+      <property
+         name="page">/fragments/recurringbusproblems.jsff</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>recurringbusproblems&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">136.5459</property>
+      <property
+         name="x">477.0</property>
+      <property
+         name="pageFragment">true</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="MethodCall2"
+      to="View3">
+      <property
+         name="fromOutcome">executeEmptyRowSet</property>
+      <property
+         name="sdm:polyPoints">R50,220.02734,133.79883,436.0,136.19531,L50</property>
+   </ControlFlowCase>
+</SDM>

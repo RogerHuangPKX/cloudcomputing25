@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
+                id="edit_customer_info_tf_edit_customer_info_tf_ExecuteWithParamsPageDef"
+                Package="taskflow" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="CustomerInfoVO1" RangeSize="25" DataControl="ArchemySearchAMDataControl"
+              id="CustomerInfoVO1Iterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="CustomerInfoVO1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="bUserId" NDValue="#{sessionScope.userId}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="KadDimensionsAreaEO"
+  Version="11.1.2.64.36"
+  DBObjectType="table"
+  DBObjectName="kad_dimensions_area"
+  AliasName="KadDimensionsAreaEO"
+  BindingStyle="JDBC"
+  UseGlueCode="false"
+  RowClass="com.archemy.searchapp.model.entities.KadDimensionsAreaEOImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_superClass" Value="com.archemy.searchapp.model.entities.AutoIncrementEntityImpl"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="Id"
+    ColumnName="ID"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="kad_dimensions_area"
+    PrimaryKey="true"
+    IsUpdateable="while_insert"
+    Domain="com.archemy.searchapp.model.AutoIncrementPropertySet">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="DimensionId"
+    IsNotNull="true"
+    ColumnName="DIMENSION_ID"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="kad_dimensions_area">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="KadId"
+    IsNotNull="true"
+    ColumnName="KAD_ID"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="kad_dimensions_area">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AreaId"
+    IsNotNull="true"
+    ColumnName="AREA_ID"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="kad_dimensions_area">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AreaParentId"
+    ColumnName="AREA_PARENT_ID"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="kad_dimensions_area">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="KadDimensionsArea"
+    Association="com.archemy.searchapp.model.assoc.KadDimKadIdFkAssoc"
+    AssociationEnd="com.archemy.searchapp.model.assoc.KadDimKadIdFkAssoc.KadDimensionsArea"
+    AssociationOtherEnd="com.archemy.searchapp.model.assoc.KadDimKadIdFkAssoc.KadIdKadDimensionsArea"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="KadIdKadDimensionsArea"
+    Association="com.archemy.searchapp.model.assoc.KadDimKadIdFkAssoc"
+    AssociationEnd="com.archemy.searchapp.model.assoc.KadDimKadIdFkAssoc.KadIdKadDimensionsArea"
+    AssociationOtherEnd="com.archemy.searchapp.model.assoc.KadDimKadIdFkAssoc.KadDimensionsArea"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="KadDimensionsArea1"
+    Association="com.archemy.searchapp.model.assoc.KadDimIdFkAssoc"
+    AssociationEnd="com.archemy.searchapp.model.assoc.KadDimIdFkAssoc.KadDimensionsArea1"
+    AssociationOtherEnd="com.archemy.searchapp.model.assoc.KadDimIdFkAssoc.DimensionIdKadDimensionsArea"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="DimensionIdKadDimensionsArea"
+    Association="com.archemy.searchapp.model.assoc.KadDimIdFkAssoc"
+    AssociationEnd="com.archemy.searchapp.model.assoc.KadDimIdFkAssoc.DimensionIdKadDimensionsArea"
+    AssociationOtherEnd="com.archemy.searchapp.model.assoc.KadDimIdFkAssoc.KadDimensionsArea1"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="KadDimensionsArea2"
+    Association="com.archemy.searchapp.model.assoc.KadDimAreaAssoc"
+    AssociationEnd="com.archemy.searchapp.model.assoc.KadDimAreaAssoc.KadDimensionsArea2"
+    AssociationOtherEnd="com.archemy.searchapp.model.assoc.KadDimAreaAssoc.AreaIdKadDimensionsArea"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="AreaIdKadDimensionsArea"
+    Association="com.archemy.searchapp.model.assoc.KadDimAreaAssoc"
+    AssociationEnd="com.archemy.searchapp.model.assoc.KadDimAreaAssoc.AreaIdKadDimensionsArea"
+    AssociationOtherEnd="com.archemy.searchapp.model.assoc.KadDimAreaAssoc.KadDimensionsArea2"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="Primary1"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="PRIMARY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.archemy.searchapp.model.entities.KadDimensionsAreaEO.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="KadDimArea">
+    <DesignTime>
+      <Attr Name="_isCascadeDelete" Value="true"/>
+      <Attr Name="_referencedKey" Value="PRIMARY"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="KAD_DIM_AREA"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.archemy.searchapp.model.entities.KadDimensionsAreaEO.AreaId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="KadDimIdFk">
+    <DesignTime>
+      <Attr Name="_isCascadeDelete" Value="true"/>
+      <Attr Name="_referencedKey" Value="PRIMARY"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="KAD_DIM_ID_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.archemy.searchapp.model.entities.KadDimensionsAreaEO.DimensionId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="KadDimKadIdFk">
+    <DesignTime>
+      <Attr Name="_isCascadeDelete" Value="true"/>
+      <Attr Name="_referencedKey" Value="PRIMARY"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="KAD_DIM_KAD_ID_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.archemy.searchapp.model.entities.KadDimensionsAreaEO.KadId"/>
+    </AttrArray>
+  </Key>
+</Entity>

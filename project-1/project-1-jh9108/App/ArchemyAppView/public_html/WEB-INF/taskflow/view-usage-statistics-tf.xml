@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="view-usage-statistics-tf">
+    <default-activity>executeEmptyRowSet</default-activity>
+    <method-call id="executeEmptyRowSet">
+      <method>#{bindings.executeEmptyRowSet.execute}</method>
+      <outcome>
+        <fixed-outcome>executeEmptyRowSet</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="viewusagestatisticsfrag">
+      <page>/fragments/viewusagestatisticsfrag.jsff</page>
+    </view>
+    <control-flow-rule id="__1">
+      <from-activity-id>executeEmptyRowSet</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>executeEmptyRowSet</from-outcome>
+        <to-activity-id>viewusagestatisticsfrag</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>
