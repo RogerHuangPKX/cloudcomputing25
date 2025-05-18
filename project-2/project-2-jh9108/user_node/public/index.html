@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P2P Chat Room</title>
+    <!-- TailwindCSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Vue 3 CDN -->
+    <script src="https://unpkg.com/vue@3.4.27/dist/vue.global.prod.js"></script>
+    <!-- marked.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Link to your custom CSS (optional, can be phased out) -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- Temporarily commenting out, will remove later -->
+    <style>
+      /* Custom scrollbar for WebKit browsers */
+      .messages-container::-webkit-scrollbar {
+        width: 8px;
+      }
+      .messages-container::-webkit-scrollbar-track {
+        background: #f0f2f5; /* Match body bg or a light gray */
+        border-radius: 10px;
+      }
+      .messages-container::-webkit-scrollbar-thumb {
+        background: #c1c1c1; /* A neutral gray */
+        border-radius: 10px;
+      }
+      .messages-container::-webkit-scrollbar-thumb:hover {
+        background: #a1a1a1; /* Darker gray on hover */
+      }
+    </style>
+    <script>
+      // Optional: TailwindCSS Custom Configuration (if needed)
+      // tailwind.config = {
+      //   theme: {
+      //     extend: {
+      //       colors: {
+      //         clifford: '#da373d',
+      //       }
+      //     }
+      //   }
+      // }
+    </script>
+  </head>
+  <body class="font-sans bg-gray-100">
+    <div
+      id="app"
+      class="container mx-auto max-w-6xl antialiased text-gray-900 h-screen flex flex-col"
+    >
+      <p>Vue App Test. Node ID: {{ nodeId || 'Connecting...' }}</p>
+      <p>Connection Status: {{ connectionStatus }}</p>
+      <div
+        v-if="errorMessage"
+        style="color: red; border: 1px solid red; padding: 10px; margin-top: 10px"
+      >
+        Error: {{ errorMessage }}
+      </div>
+
+      <!--
+        Original content from <header> to </main> is commented out below for debugging
+      -->
+
+      <header class="bg-blue-600 text-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+          <div class="flex items-center">
+            <button
+              @click="toggleSidebar"
+              class="mr-3 md:hidden p-2 rounded-md hover:bg-blue-700 focus:outline-none"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
+            </button>
+            <h1 class="text-xl font-semibold">P2P Chat Deluxe</h1>
+          </div>
+          <div v-if="roomJoined" class="flex items-center">
+            <span>Room: <strong class="font-medium">{{ currentRoom }}</strong></span>
+            <span class="ml-4"
+              >User: <strong class="font-medium">{{ nicknameInput }}</strong> ({{ nodeId ?
+              nodeId.substring(0,6) : '' }})</span
+            >
+            <button
+              @click="handleLeaveRoom"
+              class="ml-4 py-1 px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400"
+            >
+              Leave Room
+            </button>
+          </div>
+          <div v-else>Node ID: {{ nodeId ? nodeId.substring(0,6) : '' }}</div>
+        </div>
+      </header>
+
+      <div class="flex flex-1 overflow-hidden bg-white shadow-lg rounded-b-lg">
+        <aside
+          id="sidebar"
+          class="p-4 space-y-4 overflow-y-auto border-r border-gray-300 bg-gray-200 md:w-1/4 transition-all duration-300 ease-in-out"
+          :class="isSidebarOpen ? 'block w-3/4 sm:w-1/2 md:w-1/4' : 'hidden md:block md:w-1/4'"
+        >
+          <h2 class="text-lg font-semibold mb-3 text-gray-800">Rooms</h2>
+          <div
+            id="room-controls-compact"
+            v-if="!roomJoined"
+            class="p-3 bg-gray-50 rounded-md shadow"
+          >
+            <h3 class="text-md font-semibold mb-2 text-gray-700">Join/Create Room</h3>
+            <div class="mb-2">
+              <label for="nickname-sidebar" class="block text-sm font-medium text-gray-700"
+                >Nickname</label
+              >
+              <input
+                type="text"
+                id="nickname-sidebar"
+                v-model="nicknameInput"
+                placeholder="Your Nickname"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div class="mb-2">
+              <label for="roomName-sidebar" class="block text-sm font-medium text-gray-700"
+                >Room Name</label
+              >
+              <input
+                type="text"
+                id="roomName-sidebar"
+                v-model="roomNameInput"
+                placeholder="Room Name"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div class="mb-2">
+              <label for="roomPassword-sidebar" class="block text-sm font-medium text-gray-700"
+                >Password (optional)</label
+              >
+              <input
+                type="password"
+                id="roomPassword-sidebar"
+                v-model="roomPasswordInput"
+                placeholder="Password"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+            </div>
+            <button
+              @click="handleJoinRoom"
+              :disabled="isLoadingRoom || !nicknameInput || !roomNameInput"
+              class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-gray-300"
+            >
+              {{ isLoadingRoom ? 'Joining...' : 'Join / Create' }}
+            </button>
+            <div
+              v-if="isLoadingRoom"
+              class="mt-2 w-5 h-5 border-4 border-gray-200 border-t-blue-500 rounded-full animate-spin mx-auto"
+            ></div>
+          </div>
+
+          <!-- Online Users List -->
+          <div
+            v-if="roomJoined && onlineUsers.length > 0"
+            class="mt-4 p-3 bg-gray-50 rounded-md shadow"
+          >
+            <h3 class="text-md font-semibold mb-2 text-gray-700">
+              Online Users ({{ onlineUsers.length }})
+            </h3>
+            <ul class="space-y-1 max-h-40 overflow-y-auto text-sm">
+              <li
+                v-for="user in onlineUsers"
+                :key="user.nodeId"
+                class="p-1.5 rounded-md hover:bg-gray-200 truncate"
+                :class="{ 'font-semibold text-blue-600': user.nodeId === nodeId }"
+              >
+                {{ user.nickname }}
+                <span v-if="user.nodeId === nodeId" class="text-xs text-gray-500">(You)</span>
+              </li>
+            </ul>
+          </div>
+          <!-- End Online Users List -->
+
+          <div class="mt-4">
+            <button
+              @click="fetchPublicRooms"
+              :disabled="isLoadingRoomList"
+              class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-gray-300"
+            >
+              {{ isLoadingRoomList ? 'Loading Rooms...' : 'Refresh Public Rooms' }}
+            </button>
+            <ul
+              v-if="publicRooms.length > 0"
+              class="mt-2 space-y-1 bg-white rounded-md border border-gray-200 divide-y divide-gray-200"
+            >
+              <li v-for="room in publicRooms" :key="room.room_id">
+                <a
+                  href="#"
+                  @click.prevent="selectPublicRoomAndJoin(room.room_name)"
+                  class="block p-2 rounded-md hover:bg-gray-100 text-gray-700 hover:text-indigo-600"
+                  :class="{ 'bg-indigo-500 text-white hover:bg-indigo-600': room.room_name === currentRoom }"
+                >
+                  {{ room.room_name }}
+                  <span
+                    class="text-xs"
+                    :class="{'text-gray-400': room.room_name !== currentRoom, 'text-indigo-200': room.room_name === currentRoom}"
+                    >({{ room.has_password ? 'Private' : 'Public' }})</span
+                  >
+                </a>
+              </li>
+            </ul>
+            <p
+              v-if="publicRooms.length === 0 && publicRoomsFetched && !isLoadingRoomList"
+              class="text-sm text-gray-500 mt-2"
+            >
+              No public rooms found.
+            </p>
+          </div>
+        </aside>
+
+        <main
+          id="chat-area"
+          class="flex-1 grid grid-rows-[auto_1fr_auto] overflow-hidden min-h-0 transition-all duration-300 ease-in-out"
+        >
+          <div v-if="errorMessage" class="px-4 py-2 bg-white border-b border-gray-200 shadow-sm">
+            <div
+              class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+              role="alert"
+            >
+              <strong class="font-bold">Error:</strong>
+              <span class="block sm:inline">{{ errorMessage }}</span>
+              <span class="absolute top-0 bottom-0 right-0 px-4 py-3" @click="clearError">
+                <svg
+                  class="fill-current h-6 w-6 text-red-500"
+                  role="button"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <title>Close</title>
+                  <path
+                    d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.651-3.03-2.651-3.029a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.651 3.03 2.651 3.029a1.2 1.2 0 0 1 0 1.698z"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          <div class="messages-container overflow-y-auto p-4 space-y-4" ref="messagesContainer">
+            <div
+              v-for="msg in messages"
+              :key="msg.message_id || msg.temp_id"
+              class="message flex flex-col"
+              :class="{
+                'items-end': msg.sender_id === nodeId && msg.message_type !== 'local_ai_interaction',
+                'items-start': msg.sender_id !== nodeId && msg.message_type !== 'system' && msg.message_type !== 'local_ai_interaction',
+                'items-center w-full': msg.message_type === 'system',
+                'items-start w-full': msg.message_type === 'local_ai_interaction' // AI interaction full width, aligned start
+              }"
+            >
+              <!-- Regular User Message or System Message -->
+              <div
+                v-if="msg.message_type !== 'local_ai_interaction'"
+                class="max-w-xl p-3 rounded-lg shadow-md"
+                :class="{ 'bg-blue-500 text-white': msg.sender_id === nodeId, 'bg-gray-200 text-gray-800': msg.sender_id !== nodeId && msg.message_type !== 'system', 'bg-yellow-100 text-yellow-700 text-sm w-full text-center': msg.message_type === 'system' }"
+              >
+                <div
+                  v-if="msg.message_type !== 'system' && msg.sender_nickname"
+                  class="flex items-center text-sm mb-1"
+                >
+                  <span
+                    class="font-semibold"
+                    :class="msg.sender_id === nodeId ? 'text-blue-100' : 'text-gray-700'"
+                    >{{ msg.sender_nickname }}</span
+                  >
+                </div>
+                <div
+                  v-else-if="msg.message_type !== 'system'"
+                  class="flex items-center text-sm mb-1"
+                >
+                  <span
+                    class="font-semibold"
+                    :class="msg.sender_id === nodeId ? 'text-blue-100' : 'text-gray-700'"
+                    >User ({{ msg.sender_id ? msg.sender_id.substring(0,6) : 'N/A' }})</span
+                  >
+                </div>
+                <div
+                  class="message-content text-sm"
+                  v-html="renderMarkdown(msg.message_content)"
+                ></div>
+                <div
+                  class="text-xs mt-1 opacity-75"
+                  :class="{'text-blue-200': msg.sender_id === nodeId, 'text-gray-500': msg.sender_id !== nodeId && msg.message_type !== 'system', 'text-yellow-600': msg.message_type === 'system'}"
+                >
+                  {{ formatTimestamp(msg.timestamp) }}
+                </div>
+              </div>
+
+              <!-- Personal AI Interaction Message -->
+              <div
+                v-else-if="msg.message_type === 'local_ai_interaction'"
+                class="w-full max-w-2xl p-3 rounded-lg shadow-md bg-purple-100 border border-purple-300 text-gray-800 text-sm mb-2"
+              >
+                <div class="font-semibold text-purple-700 mb-1">{{ msg.sender_nickname || 'AI Assistant' }}</div>
+                <div v-if="msg.original_query" class="mb-2 p-2 bg-purple-50 rounded">
+                  <p class="text-xs text-gray-600 italic mb-1">Your query:</p>
+                  <p class="text-sm text-gray-700">{{ msg.original_query }}</p>
+                </div>
+                <div class="font-semibold text-xs text-purple-600 mb-1">Response:</div>
+                <div class="message-content" v-html="renderMarkdown(msg.message_content)"></div>
+                <div class="text-xs mt-2 text-purple-500 opacity-75">
+                  {{ formatTimestamp(msg.timestamp) }}
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <footer class="message-input bg-gray-100 p-4 border-t border-gray-300" v-if="roomJoined">
+            <textarea
+              v-model="newMessage"
+              @keyup.enter.exact="sendMessage"
+              placeholder="Type your message (Markdown supported)..."
+              class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm resize-none"
+              rows="2"
+              :disabled="connectionStatus !== 'connected' || !roomJoined"
+            ></textarea>
+            <button
+              @click="sendMessage"
+              :disabled="connectionStatus !== 'connected' || !roomJoined || !newMessage"
+              class="ml-2 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-400"
+            >
+              Send
+            </button>
+          </footer>
+        </main>
+      </div>
+      -->
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
